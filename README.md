@@ -65,7 +65,7 @@ The project will be deployed using **Vercel**.
 We use **GitHub Projects** with a Kanban board to organize tasks, user stories, and workflow for Handcrafted Haven.
 
 You can view our project board here:  
-👉 https://github.com/users/yourdesignerfriends/projects/1
+👉 https://github.com/users/bustiosmaximiliano1/projects/2
 
 ---
 
