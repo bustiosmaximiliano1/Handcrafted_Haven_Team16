@@ -65,11 +65,11 @@ The project will be deployed using **Vercel**.
 We use **GitHub Projects** with a Kanban board to organize tasks, user stories, and workflow for Handcrafted Haven.
 
 You can view our project board here:  
-
+👉 https://github.com/users/yourdesignerfriends/projects/1
 
 ---
 
 ## Design and Styling Identify
-s
-👉 You can view our Styling Identify here:  
+
+👉 You can view our Styling Identify here: 
 https://www.figma.com/design/dbcFL0Fc0Uet1BEGLq9gzs/Handcrafted-Haven?node-id=0-1&t=JvhCusRkzueDzm68-1
