@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Handcrafted Haven – Team 16
 
-## Getting Started
+Handcrafted Haven is a collaborative group project created by Team 16.  
+This web application serves as a digital marketplace where artisans can showcase and sell their handmade creations.  
+Our goal is to support local creators, promote sustainable consumption, and provide users with a beautiful and intuitive platform to discover unique handcrafted items.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Team Members
+- Maximiliano Rolando Bustios Sosa   
+- Analina Nielsen  
+- Emil Roland Roding  
+- Victor Manuel Vega  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Summary of the Project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Purpose of the Project
+Handcrafted Haven is meant to be a digital space where artisans can share and sell their handmade creations.  
+The goal is to support local creators, help them tell their stories, and connect them with people who appreciate unique, handcrafted items.  
+It’s a marketplace with a strong focus on community, creativity, and sustainable consumption.  
+We want the application to feel welcoming, easy to use, and visually consistent, so users can enjoy discovering special handmade products.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Requirements of the Project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Functional Requirements
+- Authenticated sellers can create profiles, share their background, and display their handcrafted items.  
+- Sellers can add product descriptions, prices, and images.  
+- Users can browse and filter products by category, price, and other criteria.  
+- Any user can leave ratings and written reviews for products.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Design Requirements
+- Pages must follow modern web standards for performance, validation, and usability.  
+- The application must meet **WCAG 2.1 AA accessibility guidelines**.  
+- It must be fully responsive across desktop, tablet, and mobile.  
+- Branding should be consistent: colors, typography, and layout.  
+- Navigation should be clear, intuitive, and easy to follow.
 
-## Deploy on Vercel
+### Technology Requirements
+- **Front-End:** HTML, CSS, JavaScript, Next.js  
+- **Back-End:** Node.js and a database  
+- **Code Management:** Git and GitHub  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Limitations of the Project
+- The marketplace is limited to handcrafted items only.  
+- Sellers must be authenticated; anonymous selling is not supported.  
+- The project must use the required tech stack (Next.js, Node.js, Vercel).  
+- Advanced e‑commerce features (shipping, payments, inventory) may be simplified or not included.  
+- The course timeline limits complexity; the focus is on core functionality, not a full commercial platform.  
+- Accessibility and responsive design requirements may limit certain design choices.
+
+---
+
+## Deployment
+The project will be deployed using **Vercel**.
+
+---
+
+## Project Management
+We use **GitHub Projects** with a Kanban board to organize tasks, user stories, and workflow for Handcrafted Haven.
+
+You can view our project board here:  
+
+
+---
+
+## Design and Styling Identify
+s
+👉 You can view our Styling Identify here:  
+https://www.figma.com/design/dbcFL0Fc0Uet1BEGLq9gzs/Handcrafted-Haven?node-id=0-1&t=JvhCusRkzueDzm68-1
