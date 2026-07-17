@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -19,12 +18,12 @@ export default function Hero() {
           </p>
 
           <div className={styles.buttons}>
-            <Link href="/products" className={styles.primary}>
+            <a href="/products" className={styles.primary}>
               Explore the catalog
-            </Link>
-            <Link href="/sellers" className={styles.secondary}>
+            </a>
+            <a href="/sellers" className={styles.secondary}>
               Meet the makers
-            </Link>
+            </a>
           </div>
         </div>
 
