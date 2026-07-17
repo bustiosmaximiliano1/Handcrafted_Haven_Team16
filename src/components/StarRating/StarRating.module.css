@@ -1,0 +1,15 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 1px;
+}
+
+.count {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}

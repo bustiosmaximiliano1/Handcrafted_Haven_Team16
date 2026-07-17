@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./CtaBanner.module.css";
 
 export default function CtaBanner() {
@@ -13,9 +14,9 @@ export default function CtaBanner() {
             more of every sale.
           </p>
         </div>
-        <a href="/register" className={styles.button}>
+        <Link href="/register" className={styles.button}>
           Become a seller
-        </a>
+        </Link>
       </div>
     </section>
   );

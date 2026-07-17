@@ -1,29 +1,29 @@
+import Link from "next/link";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        <a href="/" className={styles.logo} aria-label="Handcrafted Haven, home">
+        <Link href="/" className={styles.logo} aria-label="Handcrafted Haven, home">
           <span className={styles.mark} aria-hidden="true">
             ✿
           </span>
           Handcrafted&nbsp;Haven
-        </a>
+        </Link>
 
         <nav className={styles.nav} aria-label="Primary">
-          <a href="/products">Shop</a>
-          <a href="/sellers">Artisans</a>
-          <a href="/about">About</a>
+          <Link href="/products">Shop</Link>
+          <Link href="/sellers">Artisans</Link>
         </nav>
 
         <div className={styles.actions}>
-          <a href="/login" className={styles.signIn}>
+          <Link href="/login" className={styles.signIn}>
             Sign in
-          </a>
-          <a href="/register" className={styles.cta}>
+          </Link>
+          <Link href="/register" className={styles.cta}>
             Become a seller
-          </a>
+          </Link>
         </div>
       </div>
     </header>

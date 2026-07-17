@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Categories.module.css";
 
 // Craft categories. Later these link to a filtered catalog view.
@@ -72,7 +73,7 @@ export default function Categories() {
         <ul className={styles.grid}>
           {categories.map((c) => (
             <li key={c.name}>
-              <a href={c.href} className={styles.card}>
+              <Link href={c.href} className={styles.card}>
                 <span className={styles.icon} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="28" height="28">
                     {c.icon}
@@ -83,7 +84,7 @@ export default function Categories() {
                 <span className={styles.link} aria-hidden="true">
                   Browse {c.name.toLowerCase()} →
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
