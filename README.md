@@ -70,6 +70,6 @@ You can view our project board here:
 ---
 
 ## Design and Styling Identify
-s
-👉 You can view our Styling Identify here:  
+
+👉 You can view our Styling Identify here: 
 https://www.figma.com/design/dbcFL0Fc0Uet1BEGLq9gzs/Handcrafted-Haven?node-id=0-1&t=JvhCusRkzueDzm68-1
