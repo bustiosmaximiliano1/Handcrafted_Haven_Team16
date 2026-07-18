@@ -58,6 +58,8 @@ We want the application to feel welcoming, easy to use, and visually consistent,
 
 ## Deployment
 The project will be deployed using **Vercel**.
+You can view the vercel url here:  
+👉 https://handcrafted-haven-team16.vercel.app/
 
 ---
 
