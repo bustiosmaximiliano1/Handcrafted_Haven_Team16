@@ -37,18 +37,35 @@ export async function loginAction(formData: FormData) {
   });
 
   if (user.role === Role.ARTISAN) {
-    redirect("/artisan/products");
+    redirect(
+      "/success?message=" +
+        encodeURIComponent("You have logged in successfully.") +
+        "&redirect=" +
+        encodeURIComponent("/artisan/products") +
+        "&buttonText=" +
+        encodeURIComponent("Return to Dashboard")
+    );
   }
 
   if (user.role === Role.ADMIN) {
-    redirect("/admin/products");
+    redirect(
+      "/success?message=" +
+        encodeURIComponent("You have logged in successfully.") +
+        "&redirect=" +
+        encodeURIComponent("/admin/products") +
+        "&buttonText=" +
+        encodeURIComponent("Return to Admin Dashboard")
+    );
   }
 
-  if (user.role === Role.CUSTOMER) {
-    redirect("/customer");
-  }
-
-  redirect("/products");
+  redirect(
+    "/success?message=" +
+      encodeURIComponent("You have logged in successfully.") +
+      "&redirect=" +
+      encodeURIComponent("/customer") +
+      "&buttonText=" +
+      encodeURIComponent("Go to Dashboard")
+  );
 }
 
 export async function logoutAction() {

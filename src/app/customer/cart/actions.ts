@@ -59,5 +59,12 @@ export async function checkoutCartAction() {
     where: { id: cart.id },
   });
 
-  redirect("/customer/orders");
+  redirect(
+    "/success?message=" +
+      encodeURIComponent("Your order has been placed successfully.") +
+      "&redirect=" +
+      encodeURIComponent("/customer/orders") +
+      "&buttonText=" +
+      encodeURIComponent("View Orders")
+  );
 }
