@@ -17,18 +17,21 @@ enum OrderStatus {
 enum Role {
   CUSTOMER
   ADMIN
+  ARTISAN
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String    @id @default(uuid())
+  email     String    @unique
   password  String
   name      String?
-  role      Role     @default(CUSTOMER)
+  bio       String?
+  role      Role      @default(CUSTOMER)
   cart      Cart?
   orders    Order[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
 }
 
 model Category {
@@ -48,12 +51,17 @@ model Product {
   images      Image[]
   categoryId  String?
   category    Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  
+  artisanId   String?
+  artisan     User?       @relation(fields: [artisanId], references: [id], onDelete: SetNull)
+
   orderItems  OrderItem[]
   cartItems   CartItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @default(now()) @updatedAt
 
   @@index([categoryId])
+  @@index([artisanId])
   @@index([name])
 }
 
