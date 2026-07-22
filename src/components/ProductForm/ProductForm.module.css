@@ -1,0 +1,75 @@
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.title {
+  color: var(--pine);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--pine);
+  box-shadow: 0 0 0 3px rgba(51, 80, 63, 0.15);
+}
+
+.submitBtn {
+  margin-top: 1rem;
+  padding: 0.85rem 1.5rem;
+  background: var(--pine);
+  color: var(--paper);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.submitBtn:hover {
+  background: var(--pine-deep);
+}
