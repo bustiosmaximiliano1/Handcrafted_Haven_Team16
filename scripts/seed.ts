@@ -4,13 +4,11 @@ async function main() {
   console.log("Starting database seed...");
 
   // Hi, I'm Analina. Before inserting new data, I clear the tables to avoid duplicates.
-  // I delete images first because they depend on products, then products, then categories.
   await prisma.image.deleteMany({});
   await prisma.product.deleteMany({});
   await prisma.category.deleteMany({});
 
-  // Here I create the "Ceramics" category and immediately attach products to it.
-  // I prefer this nested structure because it keeps everything organized and easy to read.
+  // 1. Ceramics Category
   await prisma.category.create({
     data: {
       name: "Ceramics",
@@ -22,7 +20,7 @@ async function main() {
             price: 25.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e" }
+                { url: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           },
@@ -32,7 +30,7 @@ async function main() {
             price: 45.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad1" }
+                { url: "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           }
@@ -41,8 +39,7 @@ async function main() {
     }
   });
 
-  // In this section, I repeat the same pattern for the remaining categories.
-  // I like this approach because each category stays self‑contained and readable.
+  // 2. Woodwork Category
   await prisma.category.create({
     data: {
       name: "Woodwork",
@@ -54,7 +51,7 @@ async function main() {
             price: 15.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1601049676869-6e1f97c7b6b7" }
+                { url: "https://plus.unsplash.com/premium_photo-1668432374007-37669afd11ee?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           },
@@ -64,7 +61,7 @@ async function main() {
             price: 60.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1556912999-2f9a1a0b39f2" }
+                { url: "https://plus.unsplash.com/premium_photo-1714943792698-04676952002e?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           }
@@ -73,6 +70,7 @@ async function main() {
     }
   });
 
+  // 3. Textiles Category
   await prisma.category.create({
     data: {
       name: "Textiles",
@@ -84,7 +82,7 @@ async function main() {
             price: 30.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b" }
+                { url: "https://plus.unsplash.com/premium_photo-1695604461350-70d97106483a?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           },
@@ -94,7 +92,7 @@ async function main() {
             price: 28.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1585386959984-a4155224a1a0" }
+                { url: "https://plus.unsplash.com/premium_photo-1677355760442-696f5842a34f?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           }
@@ -103,6 +101,7 @@ async function main() {
     }
   });
 
+  // 4. Jewelry Category
   await prisma.category.create({
     data: {
       name: "Jewelry",
@@ -114,7 +113,7 @@ async function main() {
             price: 50.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3" }
+                { url: "https://images.unsplash.com/photo-1547738238-5ddb16bef15f?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           },
@@ -124,7 +123,7 @@ async function main() {
             price: 35.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1520962918287-7448c1ee0b9b" }
+                { url: "https://images.unsplash.com/photo-1766560359744-7eb65e1183ac?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           }
@@ -133,6 +132,7 @@ async function main() {
     }
   });
 
+  // 5. Home Decor Category
   await prisma.category.create({
     data: {
       name: "Home Decor",
@@ -144,7 +144,7 @@ async function main() {
             price: 22.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1517685352821-92cf88aee5a5" }
+                { url: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           },
@@ -154,7 +154,7 @@ async function main() {
             price: 55.00,
             images: {
               create: [
-                { url: "https://images.unsplash.com/photo-1582582494700-4c1a3f6b4f8e" }
+                { url: "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?auto=format&fit=crop&w=800&q=80](https://images.unsplash.com/photo-1584589167171-541ce45f1eea?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           }
@@ -172,6 +172,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    // Here I disconnect Prisma to ensure the script exits cleanly.
     await prisma.$disconnect();
   });
