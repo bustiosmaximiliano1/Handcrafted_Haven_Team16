@@ -6,78 +6,111 @@ datasource db {
   provider = "postgresql"
 }
 
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
 model User {
-  id        String     @id @default(uuid())
-  email     String     @unique
+  id        String   @id @default(uuid())
+  email     String   @unique
   password  String
+  name      String?
+  role      Role     @default(CUSTOMER)
   cart      Cart?
   orders    Order[]
-  createdAt DateTime   @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Category {
-  id        String     @id @default(uuid())
-  name      String     @unique
+  id        String    @id @default(uuid())
+  name      String    @unique
   products  Product[]
-  createdAt DateTime   @default(now())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
 }
 
 model Product {
   id          String      @id @default(uuid())
   name        String
   description String?
-  price       Decimal      @db.Decimal(10, 2)
+  price       Decimal     @db.Decimal(10, 2)
+  stock       Int         @default(0)
   images      Image[]
   categoryId  String?
-  category    Category?    @relation(fields: [categoryId], references: [id])
+  category    Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   orderItems  OrderItem[]
   cartItems   CartItem[]
-  createdAt   DateTime     @default(now())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+
+  @@index([categoryId])
+  @@index([name])
 }
 
 model Image {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   url       String
   productId String
-  product   Product   @relation(fields: [productId], references: [id])
-  createdAt DateTime  @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([productId])
 }
 
 model Cart {
-  id        String      @id @default(uuid())
-  userId    String      @unique
-  user      User        @relation(fields: [userId], references: [id])
+  id        String     @id @default(uuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   items     CartItem[]
-  createdAt DateTime    @default(now())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now()) @updatedAt
 }
 
 model CartItem {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   cartId    String
-  cart      Cart      @relation(fields: [cartId], references: [id])
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
   productId String
-  product   Product   @relation(fields: [productId], references: [id])
-  quantity  Int       @default(1)
-  createdAt DateTime  @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([cartId, productId])
 }
 
 model Order {
-  id         String       @id @default(uuid())
-  userId     String
-  user       User         @relation(fields: [userId], references: [id])
-  items      OrderItem[]
-  total      Decimal       @db.Decimal(10, 2)
-  status     String        @default("confirmed")
-  createdAt  DateTime      @default(now())
+  id        String      @id @default(uuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Restrict)
+  items     OrderItem[]
+  total     Decimal     @db.Decimal(10, 2)
+  status    OrderStatus @default(CONFIRMED)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now()) @updatedAt
+
+  @@index([userId])
 }
 
 model OrderItem {
-  id         String     @id @default(uuid())
-  orderId    String
-  order      Order      @relation(fields: [orderId], references: [id])
-  productId  String
-  product    Product    @relation(fields: [productId], references: [id])
-  quantity   Int
-  priceAtPurchase Decimal @db.Decimal(10, 2)
-  createdAt  DateTime   @default(now())
+  id              String   @id @default(uuid())
+  orderId         String
+  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  quantity        Int
+  priceAtPurchase Decimal  @db.Decimal(10, 2)
+  createdAt       DateTime @default(now())
+
+  @@index([orderId])
 }
