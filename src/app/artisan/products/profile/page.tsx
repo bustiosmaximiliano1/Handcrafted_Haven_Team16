@@ -1,0 +1,110 @@
+import { prisma } from "@/lib/prisma";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import styles from "@/app/page.module.css";
+
+// Server Action to update the profile
+async function updateProfile(formData: FormData) {
+  "use server";
+
+  const userId = formData.get("userId") as string;
+  const name = formData.get("name") as string;
+  const bio = formData.get("bio") as string;
+
+  if (!userId) return;
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      name,
+      bio,
+    },
+  });
+
+  redirect("/artisan/profile");
+}
+
+export default async function ArtisanProfileEditPage() {
+  const cookieStore = await cookies();
+  const userId = cookieStore.get("userId")?.value;
+
+  if (!userId) {
+    redirect("/login");
+  }
+
+  const artisan = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!artisan || artisan.role !== "ARTISAN") {
+    redirect("/login");
+  }
+
+  return (
+    <div className={styles.container}>
+      <section className={styles.card}>
+        <span className={styles.badge}>Account Settings</span>
+        <h1 className={styles.title}>Edit Your Artisan Profile</h1>
+        <p className={styles.subtitle} style={{ marginBottom: "2rem" }}>
+          Update your public name and share your story with customers visiting your profile.
+        </p>
+
+        <form action={updateProfile} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          <input type="hidden" name="userId" value={artisan.id} />
+
+          <div>
+            <label className={styles.label} htmlFor="name">
+              Artisan Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              defaultValue={artisan.name || ""}
+              required
+              style={{
+                width: "100%",
+                padding: "0.85rem",
+                borderRadius: "var(--radius)",
+                border: "1px solid var(--line)",
+                background: "var(--paper)",
+                color: "var(--ink)",
+                fontSize: "1rem",
+                marginTop: "0.5rem",
+              }}
+            />
+          </div>
+
+          <div>
+            <label className={styles.label} htmlFor="bio">
+              Our Story & Craft (Bio)
+            </label>
+            <textarea
+              id="bio"
+              name="bio"
+              rows={6}
+              defaultValue={artisan.bio || ""}
+              placeholder="Tell customers about your background, materials, and passion for crafting..."
+              style={{
+                width: "100%",
+                padding: "0.85rem",
+                borderRadius: "var(--radius)",
+                border: "1px solid var(--line)",
+                background: "var(--paper)",
+                color: "var(--ink)",
+                fontSize: "1rem",
+                marginTop: "0.5rem",
+                fontFamily: "inherit",
+                lineHeight: "1.6",
+              }}
+            />
+          </div>
+
+          <button type="submit" className={styles.submitBtn} style={{ alignSelf: "flex-start" }}>
+            Save Changes
+          </button>
+        </form>
+      </section>
+    </div>
+  );
+}

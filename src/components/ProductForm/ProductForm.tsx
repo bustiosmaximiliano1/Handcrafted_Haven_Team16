@@ -1,8 +1,8 @@
 import styles from "./ProductForm.module.css";
 
-interface Category {
+interface OptionItem {
   id: string;
-  name: string;
+  name: string | null;
 }
 
 interface ProductData {
@@ -12,11 +12,14 @@ interface ProductData {
   stock?: number;
   description?: string | null;
   categoryId?: string | null;
+  artisanId?: string | null;
 }
 
 interface ProductFormProps {
   initialData?: ProductData;
-  categories: Category[];
+  categories: OptionItem[];
+  artisans?: OptionItem[]; // Ahora es opcional
+  defaultArtisanId?: string; // Para forzar el ID cuando edita un artesano
   action: (formData: FormData) => Promise<void>;
   buttonText?: string;
 }
@@ -24,9 +27,14 @@ interface ProductFormProps {
 export default function ProductForm({
   initialData,
   categories,
+  artisans,
+  defaultArtisanId,
   action,
   buttonText = "Save Changes",
 }: ProductFormProps) {
+  // Determinamos el ID del artesano asignado o por defecto
+  const activeArtisanId = initialData?.artisanId || defaultArtisanId || "";
+
   return (
     <div className={styles.card}>
       {initialData?.id && (
@@ -62,6 +70,28 @@ export default function ProductForm({
             ))}
           </select>
         </div>
+
+        {/* Muestra el selector SOLO SI se proporciona la lista de artesanos (Vista Admin) */}
+        {artisans ? (
+          <div className={styles.group}>
+            <label className={styles.label}>Artisan / Maker</label>
+            <select
+              name="artisanId"
+              defaultValue={activeArtisanId}
+              className={styles.select}
+            >
+              <option value="">No Artisan Assigned</option>
+              {artisans.map((artisan) => (
+                <option key={artisan.id} value={artisan.id}>
+                  {artisan.name || "Unnamed Artisan"}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          /* Vista Artesano: Se envía de forma transparente el ID del artesano */
+          <input type="hidden" name="artisanId" value={activeArtisanId} />
+        )}
 
         <div className={styles.group}>
           <label className={styles.label}>Price ($)</label>

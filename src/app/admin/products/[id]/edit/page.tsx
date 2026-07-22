@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ProductForm from "@/components/ProductForm/ProductForm";
 import { prisma } from "@/lib/prisma";
+import { Role } from "@prisma/client"; // <-- Importamos Role
 import { notFound } from "next/navigation";
 import { updateProduct } from "../../actions";
 
@@ -12,12 +13,16 @@ interface EditProductPageProps {
 export default async function EditProductPage({ params }: EditProductPageProps) {
   const { id } = await params;
 
-  const [product, categories] = await Promise.all([
+  const [product, categories, artisans] = await Promise.all([
     prisma.product.findUnique({
       where: { id },
-      include: { category: true },
+      include: { category: true, artisan: true },
     }),
     prisma.category.findMany(),
+    prisma.user.findMany({
+      where: { role: Role.ARTISAN }, // <-- Usamos el enum directamente
+      select: { id: true, name: true },
+    }),
   ]);
 
   if (!product) {
@@ -32,10 +37,11 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
 
       <main className="container" style={{ paddingBlock: "3rem" }}>
         <h1 style={{ marginBottom: "1.5rem" }}>Edit Product</h1>
-        
+
         <ProductForm
           initialData={product}
           categories={categories}
+          artisans={artisans}
           action={updateProductWithId}
           buttonText="Save Changes"
         />

@@ -10,6 +10,7 @@ export async function updateProduct(id: string, formData: FormData) {
   const price = parseFloat(formData.get("price") as string);
   const stock = parseInt(formData.get("stock") as string, 10);
   const categoryId = formData.get("categoryId") as string;
+  const artisanId = formData.get("artisanId") as string;
 
   await prisma.product.update({
     where: { id },
@@ -19,13 +20,13 @@ export async function updateProduct(id: string, formData: FormData) {
       price,
       stock,
       categoryId: categoryId || null,
+      artisanId: artisanId || null,
     },
   });
 
-  // Revalidate Next.js cache to show updated data
   revalidatePath(`/products/${id}`);
   revalidatePath("/products");
+  revalidatePath("/artisans");
 
-  // Redirect back to product detail page
   redirect(`/products/${id}`);
 }
