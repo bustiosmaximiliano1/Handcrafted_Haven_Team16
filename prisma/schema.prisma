@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  cart      Cart?
+  orders    Order[]
+  createdAt DateTime   @default(now())
+}
+
+model Category {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  products  Product[]
+  createdAt DateTime   @default(now())
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  price       Decimal      @db.Decimal(10, 2)
+  images      Image[]
+  categoryId  String?
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+  createdAt   DateTime     @default(now())
+}
+
+model Image {
+  id        String    @id @default(uuid())
+  url       String
+  productId String
+  product   Product   @relation(fields: [productId], references: [id])
+  createdAt DateTime  @default(now())
+}
+
+model Cart {
+  id        String      @id @default(uuid())
+  userId    String      @unique
+  user      User        @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime    @default(now())
+}
+
+model CartItem {
+  id        String    @id @default(uuid())
+  cartId    String
+  cart      Cart      @relation(fields: [cartId], references: [id])
+  productId String
+  product   Product   @relation(fields: [productId], references: [id])
+  quantity  Int       @default(1)
+  createdAt DateTime  @default(now())
+}
+
+model Order {
+  id         String       @id @default(uuid())
+  userId     String
+  user       User         @relation(fields: [userId], references: [id])
+  items      OrderItem[]
+  total      Decimal       @db.Decimal(10, 2)
+  status     String        @default("confirmed")
+  createdAt  DateTime      @default(now())
+}
+
+model OrderItem {
+  id         String     @id @default(uuid())
+  orderId    String
+  order      Order      @relation(fields: [orderId], references: [id])
+  productId  String
+  product    Product    @relation(fields: [productId], references: [id])
+  quantity   Int
+  priceAtPurchase Decimal @db.Decimal(10, 2)
+  createdAt  DateTime   @default(now())
+}

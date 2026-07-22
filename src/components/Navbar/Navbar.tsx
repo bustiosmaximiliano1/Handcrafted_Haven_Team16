@@ -12,7 +12,7 @@ export default function Navbar() {
         </a>
 
         <nav className={styles.nav} aria-label="Primary">
-          <a href="/products">Shop</a>
+          <a href="/products">Products</a>
           <a href="/sellers">Artisans</a>
           <a href="/about">About</a>
         </nav>
