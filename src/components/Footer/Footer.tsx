@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Footer.module.css";
 
 const columns = [
@@ -15,7 +16,6 @@ const columns = [
     heading: "Explore",
     links: [
       { label: "Products", href: "/products" },
-      { label: "How it works", href: "/#how-it-works" },
       { label: "Artisans", href: "/artisans" },
       { label: "Become a seller", href: "/register/artisan" },
     ],
@@ -36,10 +36,13 @@ export default function Footer() {
       <div className={`container ${styles.grid}`}>
         <div className={styles.brand}>
           <Link href="/" className={styles.logo}>
-            <span aria-hidden="true">✿</span> Handcrafted Haven
+            <span className={styles.logoWrap} aria-hidden="true">
+              <Image src="/crane-logo.svg" alt="" width={18} height={18} className={styles.logoIcon} />
+            </span>
+            Handcrafted Haven
           </Link>
           <p className={styles.tagline}>
-            A marketplace for people who make things by hand.
+            Marketplace that connects artisans with customers who value unique, handmade creations.
           </p>
         </div>
 

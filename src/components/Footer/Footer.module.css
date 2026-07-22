@@ -16,11 +16,36 @@
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--paper);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 0.75rem;
+  transition: transform 0.18s ease;
 }
-.logo span {
-  color: var(--ochre);
+
+.logoWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIcon {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.92;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
+}
+
+.logo:hover .logoIcon,
+.logo:focus-visible .logoIcon {
+  opacity: 1;
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.82));
+  transform: scale(1.05);
+}
+
+.logo:active .logoIcon {
+  transform: scale(0.96);
 }
 
 .tagline {

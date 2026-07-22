@@ -18,7 +18,7 @@ export default async function Navbar() {
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo} aria-label="Handcrafted Haven, home">
           <Image
-            src="/icon.svg"
+            src="/crane-logo.svg"
             alt=""
             aria-hidden="true"
             width={22}
