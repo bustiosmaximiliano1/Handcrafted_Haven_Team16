@@ -2,6 +2,26 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
 
+// Explicit interfaces to satisfy strict TypeScript checks
+interface ProductImage {
+  id: string;
+  url: string;
+}
+
+interface ProductCategory {
+  id: string;
+  name: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  price: { toString(): string } | number | string;
+  description?: string | null;
+  images: ProductImage[];
+  category?: ProductCategory | null;
+}
+
 export default async function ProductsPage() {
   const products = await prisma.product.findMany({
     include: {
@@ -26,7 +46,7 @@ export default async function ProductsPage() {
             marginTop: "2rem",
           }}
         >
-          {products.map((product) => (
+          {products.map((product: Product) => (
             <a
               key={product.id}
               href={`/products/${product.id}`}
