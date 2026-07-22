@@ -50,7 +50,14 @@ export default async function NewArtisanProductPage() {
     });
 
     revalidatePath("/artisan/products");
-    redirect("/artisan/products");
+    redirect(
+      "/success?message=" +
+        encodeURIComponent("Your product was created successfully.") +
+        "&redirect=" +
+        encodeURIComponent("/artisan/products") +
+        "&buttonText=" +
+        encodeURIComponent("Return to Dashboard")
+    );
   }
 
   return (

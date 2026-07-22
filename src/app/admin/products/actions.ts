@@ -28,5 +28,12 @@ export async function updateProduct(id: string, formData: FormData) {
   revalidatePath("/products");
   revalidatePath("/artisans");
 
-  redirect(`/products/${id}`);
+  redirect(
+    "/success?message=" +
+      encodeURIComponent("The product was updated successfully.") +
+      "&redirect=" +
+      encodeURIComponent("/admin/products") +
+      "&buttonText=" +
+      encodeURIComponent("Return to Admin Dashboard")
+  );
 }

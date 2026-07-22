@@ -69,7 +69,14 @@ export default async function EditArtisanProductPage({ params }: EditProductProp
     });
 
     revalidatePath("/artisan/products");
-    redirect("/artisan/products");
+    redirect(
+      "/success?message=" +
+        encodeURIComponent("Your product was updated successfully.") +
+        "&redirect=" +
+        encodeURIComponent("/artisan/products") +
+        "&buttonText=" +
+        encodeURIComponent("Return to Dashboard")
+    );
   }
 
   return (

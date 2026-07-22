@@ -46,8 +46,22 @@ export async function registerAction(formData: FormData) {
   });
 
   if (role === Role.ARTISAN) {
-    redirect("/artisan/products");
+    redirect(
+      "/success?message=" +
+        encodeURIComponent("Your artisan account has been created successfully.") +
+        "&redirect=" +
+        encodeURIComponent("/artisan/products") +
+        "&buttonText=" +
+        encodeURIComponent("Return to Dashboard")
+    );
   }
 
-  redirect("/customer");
+  redirect(
+    "/success?message=" +
+      encodeURIComponent("Your customer account has been created successfully.") +
+      "&redirect=" +
+      encodeURIComponent("/customer") +
+      "&buttonText=" +
+      encodeURIComponent("Go to Dashboard")
+  );
 }
