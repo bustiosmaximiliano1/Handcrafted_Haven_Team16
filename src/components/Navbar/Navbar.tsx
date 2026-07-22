@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
+import Image from "next/image";
 import { logoutAction } from "@/app/login/actions";
 import { prisma } from "@/lib/prisma";
 import styles from "./Navbar.module.css";
@@ -16,7 +17,14 @@ export default async function Navbar() {
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo} aria-label="Handcrafted Haven, home">
-          Handcrafted Haven
+          <Image
+            src="/icon.svg"
+            alt=""
+            aria-hidden="true"
+            width={22}
+            height={22}
+            className={styles.logoIcon}
+          />
         </Link>
 
         <nav className={styles.nav} aria-label="Primary">
@@ -46,12 +54,12 @@ export default async function Navbar() {
         <div className={styles.actions}>
           {isAuthenticated ? (
             <form action={logoutAction}>
-              <button type="submit" className="button button--primary">
+              <button type="submit" className={styles.authLinkButton}>
                 Logout
               </button>
             </form>
           ) : (
-            <Link href="/login" className="button button--secondary">
+            <Link href="/login" className={styles.authLink}>
               Login
             </Link>
           )}
