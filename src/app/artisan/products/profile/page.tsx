@@ -21,7 +21,7 @@ async function updateProfile(formData: FormData) {
     },
   });
 
-  redirect("/artisan/profile");
+  redirect("/artisan/products");
 }
 
 export default async function ArtisanProfileEditPage() {
