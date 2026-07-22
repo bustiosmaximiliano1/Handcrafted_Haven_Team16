@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { normalizeProductImageUrl } from "@/lib/product-image-url";
 
 export async function updateProduct(id: string, formData: FormData) {
   const name = formData.get("name") as string;
@@ -11,6 +12,8 @@ export async function updateProduct(id: string, formData: FormData) {
   const stock = parseInt(formData.get("stock") as string, 10);
   const categoryId = formData.get("categoryId") as string;
   const artisanId = formData.get("artisanId") as string;
+  const imageUrl = formData.get("imageUrl") as string | null;
+  const normalizedImageUrl = normalizeProductImageUrl(imageUrl);
 
   await prisma.product.update({
     where: { id },
@@ -21,6 +24,12 @@ export async function updateProduct(id: string, formData: FormData) {
       stock,
       categoryId: categoryId || null,
       artisanId: artisanId || null,
+      images: normalizedImageUrl
+        ? {
+            deleteMany: {},
+            create: [{ url: normalizedImageUrl }],
+          }
+        : undefined,
     },
   });
 

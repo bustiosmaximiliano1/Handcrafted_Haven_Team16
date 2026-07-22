@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ProductForm from "@/components/ProductForm/ProductForm";
 import { prisma } from "@/lib/prisma";
+import { normalizeProductImageUrl } from "@/lib/product-image-url";
 
 export default async function NewArtisanProductPage() {
   const cookieStore = await cookies();
@@ -37,6 +38,8 @@ export default async function NewArtisanProductPage() {
     const stock = parseInt(formData.get("stock") as string, 10);
     const description = formData.get("description") as string;
     const categoryId = formData.get("categoryId") as string;
+    const imageUrl = formData.get("imageUrl") as string | null;
+    const normalizedImageUrl = normalizeProductImageUrl(imageUrl);
 
     await prisma.product.create({
       data: {
@@ -46,6 +49,11 @@ export default async function NewArtisanProductPage() {
         description,
         categoryId: categoryId || null,
         artisanId: artisan.id,
+        images: normalizedImageUrl
+          ? {
+              create: [{ url: normalizedImageUrl }],
+            }
+          : undefined,
       },
     });
 

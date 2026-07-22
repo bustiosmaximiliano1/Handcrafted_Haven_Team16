@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ProductForm from "@/components/ProductForm/ProductForm";
 import { prisma } from "@/lib/prisma";
+import { normalizeProductImageUrl } from "@/lib/product-image-url";
 
 interface EditProductProps {
   params: Promise<{ id: string }>;
@@ -32,6 +33,9 @@ export default async function EditArtisanProductPage({ params }: EditProductProp
       id,
       artisanId: artisan.id,
     },
+    include: {
+      images: true,
+    },
   });
 
   if (!product) {
@@ -53,18 +57,23 @@ export default async function EditArtisanProductPage({ params }: EditProductProp
     const stock = parseInt(formData.get("stock") as string, 10);
     const description = formData.get("description") as string;
     const categoryId = formData.get("categoryId") as string;
+    const imageUrl = formData.get("imageUrl") as string | null;
+    const normalizedImageUrl = normalizeProductImageUrl(imageUrl);
 
-    await prisma.product.updateMany({
-      where: {
-        id,
-        artisanId: artisan.id,
-      },
+    await prisma.product.update({
+      where: { id },
       data: {
         name,
         price,
         stock,
         description,
         categoryId: categoryId || null,
+        images: normalizedImageUrl
+          ? {
+              deleteMany: {},
+              create: [{ url: normalizedImageUrl }],
+            }
+          : undefined,
       },
     });
 

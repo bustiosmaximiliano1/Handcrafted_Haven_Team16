@@ -13,6 +13,7 @@ interface ProductData {
   description?: string | null;
   categoryId?: string | null;
   artisanId?: string | null;
+  images?: { url: string }[] | null;
 }
 
 interface ProductFormProps {
@@ -124,6 +125,43 @@ export default function ProductForm({
             defaultValue={initialData?.description || ""}
             className={styles.textarea}
           />
+        </div>
+
+        <div className={styles.group}>
+          <label className={styles.label}>Product Image URL</label>
+          <input
+            type="url"
+            name="imageUrl"
+            defaultValue={initialData?.images?.[0]?.url || ""}
+            placeholder="https://plus.unsplash.com/premium_photo-1714943792698-04676952002e?auto=format&fit=crop&w=800&q=80"
+            className={styles.input}
+          />
+          <p
+            style={{
+              marginTop: "0.5rem",
+              fontSize: "0.9rem",
+              color: "#4b5563",
+            }}
+          >
+            Example:{" "}
+            https://plus.unsplash.com/premium_photo-1714943792698-04676952002e?auto=format&fit=crop&w=800&q=80
+          </p>
+          <p style={{ marginTop: "0.5rem", fontSize: "0.9rem", color: "#4b5563" }}>
+            Hey seller, from Team 16 we want to share with you some great places where you can find lovely images for your product.
+          </p>
+          <p style={{ marginTop: "0.5rem", fontSize: "0.9rem", color: "#4b5563" }}>
+            You can explore:
+            <a href="https://unsplash.com" target="_blank" rel="noreferrer" style={{ color: "#2563eb", marginLeft: "0.25rem" }}>
+              Unsplash
+            </a>,
+            <a href="https://www.pexels.com" target="_blank" rel="noreferrer" style={{ color: "#2563eb", marginLeft: "0.25rem" }}>
+              Pexels
+            </a>,
+            and
+            <a href="https://pixabay.com" target="_blank" rel="noreferrer" style={{ color: "#2563eb", marginLeft: "0.25rem" }}>
+              Pixabay
+            </a>.
+          </p>
         </div>
 
         <button type="submit" className={styles.submitBtn}>
