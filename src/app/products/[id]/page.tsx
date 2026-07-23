@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import styles from "./ProductDetail.module.css";
 
 interface ProductDetailPageProps {
   params: Promise<{ id: string }>;
@@ -65,7 +67,16 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
   const product = await prisma.product.findUnique({
     where: { id },
-    include: { images: true, category: true },
+    include: {
+      images: true,
+      category: true,
+      artisan: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   });
 
   if (!product) {
@@ -76,40 +87,62 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     <>
       <Navbar />
 
-      <main
-        className="product-detail-page"
-        style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}
-      >
-        <section className="surface-card" style={{ padding: "1.5rem" }}>
-          <h1>{product.name}</h1>
-          <p className="section-label" style={{ marginTop: "0.5rem", marginBottom: "1rem", textTransform: "uppercase" }}>
-            {product.category?.name}
-          </p>
+      <main className={`container ${styles.page}`}>
+        <section className={styles.grid}>
+          <div className={`${styles.imageCard} surface-card`}>
+            {product.images[0] ? (
+              <div className={styles.imageWrap}>
+                <Image
+                  src={product.images[0].url}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  className="product-card__image"
+                />
+              </div>
+            ) : (
+              <div className={styles.imagePlaceholder}>No product image available yet.</div>
+            )}
+          </div>
 
-          {product.images[0] && (
-            <div className="product-detail__image-wrap" style={{ margin: "1rem 0" }}>
-              <Image
-                src={product.images[0].url}
-                alt={product.name}
-                fill
-                sizes="(max-width: 900px) 100vw, 800px"
-                className="product-card__image"
-              />
+          <article className={`${styles.infoCard} surface-card`}>
+            <div className={styles.metaRow}>
+              <span className={styles.pill}>{product.category?.name || "Uncategorized"}</span>
+              <span className={styles.pill}>Stock: {product.stock}</span>
             </div>
-          )}
 
-          <p style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
-            ${product.price.toString()}
-          </p>
+            <h1 className={styles.title}>{product.name}</h1>
 
-          <p className="text-muted">{product.description}</p>
+            <p className={styles.artisanText}>
+              By{" "}
+              {product.artisan?.id ? (
+                <Link href={`/artisans/${product.artisan.id}/profile`} className={styles.artisanLink}>
+                  {product.artisan.name || "Unknown Artisan"}
+                </Link>
+              ) : (
+                "Unknown Artisan"
+              )}
+            </p>
 
-          <form action={addToCart}>
-            <input type="hidden" name="productId" value={product.id} />
-            <button type="submit" className="button button--primary" style={{ marginTop: "1rem" }}>
-              Add to cart
-            </button>
-          </form>
+            <p className={styles.price}>${product.price.toString()}</p>
+
+            <p className={styles.description}>
+              {product.description || "No description available yet."}
+            </p>
+
+            <div className={styles.actions}>
+              <form action={addToCart}>
+                <input type="hidden" name="productId" value={product.id} />
+                <button type="submit" className="button button--primary button--subtle-lift">
+                  Add to cart
+                </button>
+              </form>
+
+              <Link href="/products" className={styles.backLink}>
+                Back to catalog
+              </Link>
+            </div>
+          </article>
         </section>
       </main>
 
