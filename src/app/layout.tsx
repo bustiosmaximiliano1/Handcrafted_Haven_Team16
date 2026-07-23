@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import { getBaseUrl } from "@/lib/site-url";
 import "./globals.css";
 
 // Display face — elegant serif for headlines and brand moments.
@@ -22,21 +21,9 @@ const inter = Inter({
 
 // SEO: Next.js reads this metadata to build <title>, <meta> and social tags.
 export const metadata: Metadata = {
-  metadataBase: new URL(getBaseUrl()),
   title: "Handcrafted Haven — Unique handmade goods from independent makers",
   description:
     "A marketplace for artisans and crafters. Browse ceramics, textiles, jewelry, and woodwork made by hand, and buy directly from the maker.",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
   keywords: [
     "handmade",
     "handcrafted",
