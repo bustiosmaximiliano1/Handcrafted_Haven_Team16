@@ -6,12 +6,19 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Role } from "@prisma/client";
 
-export async function loginAction(formData: FormData) {
+export type LoginActionState = {
+  error: string | null;
+};
+
+export async function loginAction(
+  _prevState: LoginActionState,
+  formData: FormData
+): Promise<LoginActionState> {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
   if (!email || !password) {
-    throw new Error("Please provide both email and password.");
+    return { error: "Please provide both email and password." };
   }
 
   const user = await prisma.user.findUnique({
@@ -19,13 +26,13 @@ export async function loginAction(formData: FormData) {
   });
 
   if (!user) {
-    throw new Error("Invalid email or password.");
+    return { error: "Invalid email or password." };
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password);
 
   if (!isValidPassword) {
-    throw new Error("Invalid email or password.");
+    return { error: "Invalid email or password." };
   }
 
   const cookieStore = await cookies();

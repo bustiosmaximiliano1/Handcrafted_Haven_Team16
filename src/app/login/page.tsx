@@ -1,8 +1,8 @@
-import { loginAction } from "./actions";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
 import styles from "@/app/auth-form.module.css";
+import LoginForm from "./LoginForm";
 
 export default function LoginPage() {
   return (
@@ -14,21 +14,7 @@ export default function LoginPage() {
           <span className="section-label">Welcome Back</span>
           <h1 className={`page-title ${styles.authTitle}`}>Login</h1>
 
-          <form action={loginAction} className={styles.authForm}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" required className={styles.input} />
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="password">Password</label>
-              <input type="password" id="password" name="password" required className={styles.input} />
-            </div>
-
-            <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
-              Sign In
-            </button>
-          </form>
+          <LoginForm />
 
           <p className={styles.authHelp}>
             No account? <Link href="/register/customer">Create one</Link>
