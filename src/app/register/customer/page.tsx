@@ -1,40 +1,40 @@
 import { registerAction } from "../actions";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import styles from "@/app/page.module.css";
+import styles from "@/app/auth-form.module.css";
 
 export default function RegisterCustomerPage() {
   return (
     <>
       <Navbar />
 
-      <main className="container" style={{ maxWidth: "560px", margin: "3.5rem auto", paddingInline: "1.5rem" }}>
-        <section className={styles.card}>
-          <span className={styles.badge}>Create Account</span>
-          <h1 className={styles.title} style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>Create your customer account</h1>
-          <p style={{ marginBottom: "1.5rem", color: "var(--ink-soft)" }}>
+      <main className={`container ${styles.authMain}`}>
+        <section className={`${styles.authCard} surface-card`}>
+          <span className="section-label">Create Account</span>
+          <h1 className={`page-title ${styles.authTitle}`}>Create your customer account</h1>
+          <p className={`section-subtitle ${styles.authSubtitle}`}>
             Create a customer account to browse products, add items to your cart, and place orders.
           </p>
 
-          <form action={registerAction} style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
+          <form action={registerAction} className={styles.authForm}>
             <input type="hidden" name="role" value="CUSTOMER" />
 
-            <div>
+            <div className={styles.field}>
               <label className={styles.label} htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" required style={{ width: "100%", padding: "0.75rem", borderRadius: "var(--radius)", border: "1px solid var(--line)", background: "var(--paper)", color: "var(--ink)", marginTop: "0.4rem" }} />
+              <input type="text" id="name" name="name" required className={styles.input} />
             </div>
 
-            <div>
+            <div className={styles.field}>
               <label className={styles.label} htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" required style={{ width: "100%", padding: "0.75rem", borderRadius: "var(--radius)", border: "1px solid var(--line)", background: "var(--paper)", color: "var(--ink)", marginTop: "0.4rem" }} />
+              <input type="email" id="email" name="email" required className={styles.input} />
             </div>
 
-            <div>
+            <div className={styles.field}>
               <label className={styles.label} htmlFor="password">Password</label>
-              <input type="password" id="password" name="password" required style={{ width: "100%", padding: "0.75rem", borderRadius: "var(--radius)", border: "1px solid var(--line)", background: "var(--paper)", color: "var(--ink)", marginTop: "0.4rem" }} />
+              <input type="password" id="password" name="password" required className={styles.input} />
             </div>
 
-            <button type="submit" className={styles.submitBtn} style={{ marginTop: "1rem" }}>
+            <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
               Create Customer Account
             </button>
           </form>
