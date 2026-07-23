@@ -35,6 +35,11 @@ export default function RegisterArtisanPage() {
               <input type="password" id="password" name="password" required style={{ width: "100%", padding: "0.75rem", borderRadius: "var(--radius)", border: "1px solid var(--line)", background: "var(--paper)", color: "var(--ink)", marginTop: "0.4rem" }} />
             </div>
 
+            <div>
+              <label className={styles.label} htmlFor="profileImageUrl">Profile Photo URL (optional)</label>
+              <input type="url" id="profileImageUrl" name="profileImageUrl" placeholder="https://..." style={{ width: "100%", padding: "0.75rem", borderRadius: "var(--radius)", border: "1px solid var(--line)", background: "var(--paper)", color: "var(--ink)", marginTop: "0.4rem" }} />
+            </div>
+
             <button type="submit" className={styles.submitBtn} style={{ marginTop: "1rem" }}>
               Create Seller Account
             </button>

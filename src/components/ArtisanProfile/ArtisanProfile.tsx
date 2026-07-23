@@ -14,15 +14,32 @@ interface ArtisanProfileProps {
     id: string;
     name: string | null;
     bio: string | null;
+    profileImageUrl?: string | null;
     products: Product[];
   };
 }
 
 export default function ArtisanProfile({ artisan }: ArtisanProfileProps) {
+  const fallbackInitial = (artisan.name?.trim()?.charAt(0) || "A").toUpperCase();
+
   return (
     <div className={styles.container}>
       <section className={`${styles.card} surface-card`}>
         <span className="section-label">Artisan Profile</span>
+
+        <div className={styles.avatarWrap}>
+          {artisan.profileImageUrl ? (
+            <img
+              src={artisan.profileImageUrl}
+              alt={`Portrait of ${artisan.name || "artisan"}`}
+              className={styles.avatar}
+            />
+          ) : (
+            <div aria-hidden="true" className={styles.avatarFallback}>
+              {fallbackInitial}
+            </div>
+          )}
+        </div>
 
         <h1 className={styles.title}>
           {artisan.name || "Unnamed Artisan"}

@@ -16,7 +16,11 @@ export default async function ArtisanProfilePage({ params }: ArtisanProfilePageP
       id,
       role: "ARTISAN",
     },
-    include: {
+    select: {
+      id: true,
+      name: true,
+      bio: true,
+      profileImageUrl: true,
       products: {
         include: {
           category: true,

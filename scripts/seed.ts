@@ -20,6 +20,7 @@ async function main() {
       password: passwordHash,
       name: "Elena Rostova",
       bio: "Crafting minimalist ceramics inspired by nature and earthy textures for over 10 years.",
+      profileImageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
       role: Role.ARTISAN,
     },
   });
@@ -30,6 +31,7 @@ async function main() {
       password: passwordHash,
       name: "Lucas Vance",
       bio: "Working with sustainable local lumber to create durable, timeless kitchenware.",
+      profileImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
       role: Role.ARTISAN,
     },
   });
@@ -40,6 +42,7 @@ async function main() {
       password: passwordHash,
       name: "Aisha Patel",
       bio: "Passionate about traditional weaving techniques combined with modern eco-friendly fabrics.",
+      profileImageUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80",
       role: Role.ARTISAN,
     },
   });
@@ -50,6 +53,7 @@ async function main() {
       password: passwordHash,
       name: "Mateo Silva",
       bio: "Designing delicate pieces influenced by organic forms and precious natural stones.",
+      profileImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
       role: Role.ARTISAN,
     },
   });
@@ -60,6 +64,7 @@ async function main() {
       password: passwordHash,
       name: "Sophia Chen",
       bio: "Creating cozy, handcrafted home accents designed to bring warmth into every corner.",
+      profileImageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
       role: Role.ARTISAN,
     },
   });

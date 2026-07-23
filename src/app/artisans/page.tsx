@@ -9,6 +9,7 @@ export default async function ArtisansListPage() {
     select: {
       id: true,
       name: true,
+      profileImageUrl: true,
       email: true,
       createdAt: true,
       _count: {
@@ -47,6 +48,7 @@ export default async function ArtisansListPage() {
                 artisan={{
                   id: artisan.id,
                   name: artisan.name,
+                  profileImageUrl: artisan.profileImageUrl,
                   productCount: artisan._count.products,
                 }}
               />

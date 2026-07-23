@@ -28,6 +28,31 @@
   margin-bottom: 0.5rem;
 }
 
+.avatarWrap {
+  margin-top: 1rem;
+}
+
+.avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+.avatarFallback {
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--ink-soft);
+  background: var(--paper-soft);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
 .sectionTitle {
   color: var(--pine);
   font-size: 1.5rem;

@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { normalizeProfileImageUrl } from "@/lib/profile-image-url";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import styles from "@/app/page.module.css";
@@ -10,14 +11,22 @@ async function updateProfile(formData: FormData) {
   const userId = formData.get("userId") as string;
   const name = formData.get("name") as string;
   const bio = formData.get("bio") as string;
+  const profileImageUrlInput = formData.get("profileImageUrl") as string | null;
 
   if (!userId) return;
+
+  const normalizedProfileImageUrl = normalizeProfileImageUrl(profileImageUrlInput);
+
+  if (profileImageUrlInput?.trim() && !normalizedProfileImageUrl) {
+    throw new Error("Please provide a valid profile image URL.");
+  }
 
   await prisma.user.update({
     where: { id: userId },
     data: {
       name,
       bio,
+      profileImageUrl: normalizedProfileImageUrl,
     },
   });
 
@@ -96,6 +105,29 @@ export default async function ArtisanProfileEditPage() {
                 marginTop: "0.5rem",
                 fontFamily: "inherit",
                 lineHeight: "1.6",
+              }}
+            />
+          </div>
+
+          <div>
+            <label className={styles.label} htmlFor="profileImageUrl">
+              Profile Photo URL
+            </label>
+            <input
+              type="url"
+              id="profileImageUrl"
+              name="profileImageUrl"
+              defaultValue={artisan.profileImageUrl || ""}
+              placeholder="https://..."
+              style={{
+                width: "100%",
+                padding: "0.85rem",
+                borderRadius: "var(--radius)",
+                border: "1px solid var(--line)",
+                background: "var(--paper)",
+                color: "var(--ink)",
+                fontSize: "1rem",
+                marginTop: "0.5rem",
               }}
             />
           </div>
