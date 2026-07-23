@@ -13,6 +13,16 @@ async function main() {
 
   const passwordHash = await bcrypt.hash("password123", 10);
 
+  // Admin account
+  await prisma.user.create({
+    data: {
+      email: "team.16@handcrafted.com",
+      password: passwordHash,
+      name: "Team 16",
+      role: Role.ADMIN,
+    },
+  });
+
   // 0. Create Artisans (Users with ARTISAN role)
   const ceramicsArtisan = await prisma.user.create({
     data: {
@@ -68,6 +78,7 @@ async function main() {
             name: "Handcrafted Ceramic Mug",
             description: "A beautiful handmade mug perfect for coffee lovers.",
             price: 25.00,
+            stock: 10,
             artisanId: ceramicsArtisan.id,
             images: {
               create: [
@@ -79,6 +90,7 @@ async function main() {
             name: "Rustic Clay Vase",
             description: "A tall clay vase with natural earthy tones.",
             price: 45.00,
+            stock: 10,
             artisanId: ceramicsArtisan.id,
             images: {
               create: [
@@ -101,6 +113,7 @@ async function main() {
             name: "Hand-Carved Wooden Spoon",
             description: "Made from sustainable oak, perfect for cooking.",
             price: 15.00,
+            stock: 10,
             artisanId: woodworkArtisan.id,
             images: {
               create: [
@@ -112,6 +125,7 @@ async function main() {
             name: "Artisan Cutting Board",
             description: "Walnut cutting board with a smooth finish.",
             price: 60.00,
+            stock: 10,
             artisanId: woodworkArtisan.id,
             images: {
               create: [
@@ -134,6 +148,7 @@ async function main() {
             name: "Handwoven Cotton Scarf",
             description: "Soft, breathable, and perfect for any season.",
             price: 30.00,
+            stock: 10,
             artisanId: textilesArtisan.id,
             images: {
               create: [
@@ -145,6 +160,7 @@ async function main() {
             name: "Embroidered Linen Tote",
             description: "Eco-friendly tote bag with floral embroidery.",
             price: 28.00,
+            stock: 10,
             artisanId: textilesArtisan.id,
             images: {
               create: [
@@ -167,6 +183,7 @@ async function main() {
             name: "Silver Leaf Pendant",
             description: "Handcrafted silver pendant inspired by nature.",
             price: 50.00,
+            stock: 10,
             artisanId: jewelryArtisan.id,
             images: {
               create: [
@@ -178,6 +195,7 @@ async function main() {
             name: "Gemstone Bracelet",
             description: "Made with natural stones and elastic cord.",
             price: 35.00,
+            stock: 10,
             artisanId: jewelryArtisan.id,
             images: {
               create: [
@@ -200,6 +218,7 @@ async function main() {
             name: "Handmade Soy Candle",
             description: "Lavender-scented candle in a reusable glass jar.",
             price: 22.00,
+            stock: 10,
             artisanId: jewelryArtisan.id,
             images: {
               create: [
@@ -211,6 +230,7 @@ async function main() {
             name: "Macrame Wall Hanging",
             description: "Boho-style wall decor made with natural cotton rope.",
             price: 55.00,
+            stock: 10,
             artisanId: jewelryArtisan.id,
             images: {
               create: [
@@ -233,6 +253,7 @@ async function main() {
             name: "Handblown Glass Vase",
             description: "A handblown glass vase with a soft transparent finish for modern interiors.",
             price: 48.00,
+            stock: 10,
             artisanId: woodworkArtisan.id,
             images: {
               create: [
@@ -244,6 +265,7 @@ async function main() {
             name: "Fused Glass Coasters",
             description: "Set of colorful fused glass coasters, handmade in small batches.",
             price: 32.00,
+            stock: 10,
             artisanId: woodworkArtisan.id,
             images: {
               create: [

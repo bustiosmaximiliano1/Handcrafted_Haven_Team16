@@ -1,5 +1,6 @@
 import Link from "next/link";
-import styles from "@/app/page.module.css";
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
 
 interface SuccessPageProps {
   searchParams: Promise<{
@@ -16,24 +17,30 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const buttonText = params.buttonText || "Return to Dashboard";
 
   return (
-    <div className={styles.container} style={{ maxWidth: "600px", margin: "4rem auto", padding: "2rem" }}>
-      <section className={`${styles.card} surface-card`}>
-        <span className={styles.badge}>Success</span>
-        <h1 className={styles.title} style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-          {message}
-        </h1>
-        <p className={`${styles.subtitle} text-muted`} style={{ marginBottom: "2rem" }}>
-          Everything is ready for the next step.
-        </p>
+    <>
+      <Navbar />
+      <main className="container" style={{ maxWidth: "760px", margin: "4.5rem auto", paddingInline: "1.5rem" }}>
+        <section className="surface-card" style={{ padding: "2rem", textAlign: "center" }}>
+          <span className="section-label">Success</span>
 
-        <Link
-          href={redirectPath}
-          className={`${styles.submitBtn} button button--primary`}
-          style={{ display: "inline-flex", alignItems: "center", justifyContent: "center" }}
-        >
-          {buttonText}
-        </Link>
-      </section>
-    </div>
+          <h1 className="page-title" style={{ marginTop: "0.8rem", marginBottom: "0.8rem" }}>
+            {message}
+          </h1>
+
+          <p className="section-subtitle" style={{ marginBottom: "2rem" }}>
+            Everything is ready for the next step.
+          </p>
+
+          <Link
+            href={redirectPath}
+            className="button button--primary button--subtle-lift"
+            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+          >
+            {buttonText}
+          </Link>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

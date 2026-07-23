@@ -32,54 +32,56 @@ export default async function ArtisanProductsPage() {
       <Navbar />
       <main style={{ maxWidth: "1000px", margin: "2rem auto", padding: "0 1.5rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-          <h1 style={{ fontSize: "1.75rem", fontWeight: "700" }}>My Products</h1>
+          <h1 className="page-title" style={{ marginBottom: 0 }}>My Products</h1>
           <Link
             href="/artisan/products/new"
-            style={{
-              padding: "0.5rem 1rem",
-              backgroundColor: "#2563eb",
-              color: "white",
-              borderRadius: "0.375rem",
-              textDecoration: "none",
-              fontWeight: "600",
-            }}
+            className="button button--primary"
           >
             + Add New Product
           </Link>
         </div>
 
         {products.length === 0 ? (
-          <p>You have not added any products yet.</p>
+          <p className="section-subtitle">You have not added any products yet.</p>
         ) : (
-          <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid #e5e7eb" }}>
-                <th style={{ padding: "0.75rem" }}>Name</th>
-                <th style={{ padding: "0.75rem" }}>Category</th>
-                <th style={{ padding: "0.75rem" }}>Price</th>
-                <th style={{ padding: "0.75rem" }}>Stock</th>
-                <th style={{ padding: "0.75rem" }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id} style={{ borderBottom: "1px solid #e5e7eb" }}>
-                  <td style={{ padding: "0.75rem" }}>{product.name}</td>
-                  <td style={{ padding: "0.75rem" }}>{product.category?.name || "Uncategorized"}</td>
-                  <td style={{ padding: "0.75rem" }}>${product.price.toString()}</td>
-                  <td style={{ padding: "0.75rem" }}>{product.stock}</td>
-                  <td style={{ padding: "0.75rem" }}>
-                    <Link
-                      href={`/artisan/products/${product.id}/edit`}
-                      style={{ color: "#2563eb", fontWeight: "500", textDecoration: "none" }}
-                    >
-                      Edit
-                    </Link>
-                  </td>
+          <div className="surface-card" style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+              <thead>
+                <tr style={{ borderBottom: "1px solid var(--line)" }}>
+                  <th style={{ padding: "0.9rem" }}>Name</th>
+                  <th style={{ padding: "0.9rem" }}>Category</th>
+                  <th style={{ padding: "0.9rem" }}>Price</th>
+                  <th style={{ padding: "0.9rem" }}>Stock</th>
+                  <th style={{ padding: "0.9rem" }}>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.id} style={{ borderBottom: "1px solid var(--line)" }}>
+                    <td style={{ padding: "0.9rem" }}>
+                      <Link
+                        href={`/products/${product.id}`}
+                        style={{ color: "var(--ink)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "0.2em" }}
+                      >
+                        {product.name}
+                      </Link>
+                    </td>
+                    <td style={{ padding: "0.9rem", color: "var(--ink-soft)" }}>{product.category?.name || "Uncategorized"}</td>
+                    <td style={{ padding: "0.9rem" }}>${product.price.toString()}</td>
+                    <td style={{ padding: "0.9rem" }}>{product.stock}</td>
+                    <td style={{ padding: "0.9rem" }}>
+                      <Link
+                        href={`/artisan/products/${product.id}/edit`}
+                        style={{ color: "var(--ink)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "0.2em" }}
+                      >
+                        Edit
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </main>
       <Footer />

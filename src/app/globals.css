@@ -131,6 +131,7 @@ button:focus-visible {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.85rem 1.6rem;
+  border: none;
   border-radius: 999px;
   font-weight: 600;
   font-size: 1rem;
@@ -155,6 +156,19 @@ button:focus-visible {
 .button--secondary:hover {
   background: var(--pine);
   color: var(--paper);
+}
+
+.button--subtle-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.button--subtle-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px -12px rgba(0, 0, 0, 0.5);
+}
+
+.button--subtle-lift:active {
+  transform: translateY(0);
 }
 
 /* Catalog card helpers */
