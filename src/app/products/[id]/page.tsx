@@ -57,7 +57,7 @@ async function addToCart(formData: FormData) {
     },
   });
 
-  redirect("/customer/cart");
+  redirect("/dashboard/customer/cart");
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {

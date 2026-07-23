@@ -34,19 +34,19 @@ export default async function Navbar() {
 
           {isArtisan && (
             <>
-              <Link href="/artisan/products">My Products</Link>
-              <Link href="/artisan/products/profile">Profile</Link>
+              <Link href="/dashboard/artisan/products">My Products</Link>
+              <Link href="/dashboard/artisan/products/profile">Profile</Link>
             </>
           )}
 
-          {isAdmin && <Link href="/admin/products">Admin Panel</Link>}
+          {isAdmin && <Link href="/dashboard/admin/products">Admin Panel</Link>}
 
           {!isArtisan && !isAdmin && isAuthenticated && (
             <>
-              <Link href="/customer">Dashboard</Link>
-              <Link href="/customer/orders">Orders</Link>
-              <Link href="/customer/cart">Cart</Link>
-              <Link href="/customer/profile">Profile</Link>
+              <Link href="/dashboard/customer">Dashboard</Link>
+              <Link href="/dashboard/customer/orders">Orders</Link>
+              <Link href="/dashboard/customer/cart">Cart</Link>
+              <Link href="/dashboard/customer/profile">Profile</Link>
             </>
           )}
         </nav>

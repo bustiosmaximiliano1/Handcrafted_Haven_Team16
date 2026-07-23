@@ -34,7 +34,7 @@ export default async function ArtisanProductsPage() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
           <h1 className="page-title" style={{ marginBottom: 0 }}>My Products</h1>
           <Link
-            href="/artisan/products/new"
+            href="/dashboard/artisan/products/new"
             className="button button--primary"
           >
             + Add New Product
@@ -71,7 +71,7 @@ export default async function ArtisanProductsPage() {
                     <td style={{ padding: "0.9rem" }}>{product.stock}</td>
                     <td style={{ padding: "0.9rem" }}>
                       <Link
-                        href={`/artisan/products/${product.id}/edit`}
+                        href={`/dashboard/artisan/products/${product.id}/edit`}
                         style={{ color: "var(--ink)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "0.2em" }}
                       >
                         Edit

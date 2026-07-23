@@ -58,7 +58,7 @@ export async function registerAction(formData: FormData) {
       "/success?message=" +
         encodeURIComponent("Your artisan account has been created successfully.") +
         "&redirect=" +
-        encodeURIComponent("/artisan/products") +
+        encodeURIComponent("/dashboard/artisan/products") +
         "&buttonText=" +
         encodeURIComponent("Return to Dashboard")
     );
@@ -68,7 +68,7 @@ export async function registerAction(formData: FormData) {
     "/success?message=" +
       encodeURIComponent("Your customer account has been created successfully.") +
       "&redirect=" +
-      encodeURIComponent("/customer") +
+      encodeURIComponent("/dashboard/customer") +
       "&buttonText=" +
       encodeURIComponent("Go to Dashboard")
   );

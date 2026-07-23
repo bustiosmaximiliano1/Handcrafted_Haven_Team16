@@ -32,7 +32,7 @@ async function updateProfile(formData: FormData) {
     },
   });
 
-  redirect("/success?message=Your%20changes%20have%20been%20saved%20successfully.&redirect=/artisan/products&buttonText=Return%20to%20Dashboard");
+  redirect("/success?message=Your%20changes%20have%20been%20saved%20successfully.&redirect=/dashboard/artisan/products&buttonText=Return%20to%20Dashboard");
 }
 
 export default async function ArtisanProfileEditPage() {

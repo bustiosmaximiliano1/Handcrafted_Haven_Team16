@@ -41,7 +41,7 @@ export async function updateProduct(id: string, formData: FormData) {
     "/success?message=" +
       encodeURIComponent("The product was updated successfully.") +
       "&redirect=" +
-      encodeURIComponent("/admin/products") +
+      encodeURIComponent("/dashboard/admin/products") +
       "&buttonText=" +
       encodeURIComponent("Return to Admin Dashboard")
   );

@@ -41,7 +41,7 @@ export async function loginAction(formData: FormData) {
       "/success?message=" +
         encodeURIComponent("You have logged in successfully.") +
         "&redirect=" +
-        encodeURIComponent("/artisan/products") +
+        encodeURIComponent("/dashboard/artisan/products") +
         "&buttonText=" +
         encodeURIComponent("Return to Dashboard")
     );
@@ -52,7 +52,7 @@ export async function loginAction(formData: FormData) {
       "/success?message=" +
         encodeURIComponent("You have logged in successfully.") +
         "&redirect=" +
-        encodeURIComponent("/admin/products") +
+        encodeURIComponent("/dashboard/admin/products") +
         "&buttonText=" +
         encodeURIComponent("Return to Admin Dashboard")
     );
@@ -62,7 +62,7 @@ export async function loginAction(formData: FormData) {
     "/success?message=" +
       encodeURIComponent("You have logged in successfully.") +
       "&redirect=" +
-      encodeURIComponent("/customer") +
+      encodeURIComponent("/dashboard/customer") +
       "&buttonText=" +
       encodeURIComponent("Go to Dashboard")
   );
