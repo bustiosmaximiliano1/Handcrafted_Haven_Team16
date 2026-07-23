@@ -1,0 +1,95 @@
+.main {
+  max-width: 760px;
+  margin: 3.5rem auto;
+  padding-inline: 1.5rem;
+}
+
+.card {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+}
+
+.title {
+  margin-top: 0.8rem;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.textarea {
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.submit {
+  align-self: flex-start;
+}
+
+.successWrap {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+}
+
+.successCard {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.successTitle {
+  margin-top: 0.9rem;
+  margin-bottom: 1rem;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+}
+
+.successSubtitle {
+  margin-bottom: 2rem;
+}
+
+.successButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

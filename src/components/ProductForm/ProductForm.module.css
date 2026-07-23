@@ -73,3 +73,14 @@
 .submitBtn:hover {
   background: var(--pine-deep);
 }
+
+.helperText {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.helperLink {
+  color: #2563eb;
+  margin-left: 0.25rem;
+}

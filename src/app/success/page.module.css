@@ -1,0 +1,25 @@
+.main {
+  max-width: 760px;
+  margin: 4.5rem auto;
+  padding-inline: 1.5rem;
+}
+
+.card {
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

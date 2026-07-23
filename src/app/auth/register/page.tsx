@@ -1,24 +1,23 @@
-import { registerAction } from "../actions";
+import { registerAction } from "./actions";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import Link from "next/link";
-import styles from "@/app/auth-form.module.css";
+import styles from "@/app/auth/auth-form.module.css";
 
-export default function RegisterCustomerPage() {
+export default function RegisterPage() {
   return (
     <>
       <Navbar />
 
       <main className={`container ${styles.authMain}`}>
         <section className={`${styles.authCard} surface-card`}>
-          <span className="section-label">Create Account</span>
-          <h1 className={`page-title ${styles.authTitle}`}>Create your customer account</h1>
+          <span className="section-label">Become a Seller</span>
+          <h1 className={`page-title ${styles.authTitle}`}>Create your artisan account</h1>
           <p className={`section-subtitle ${styles.authSubtitle}`}>
-            Create a customer account to browse products, add items to your cart, and place orders.
+            Create an artisan account to manage your products, update your profile, and sell your handcrafted pieces.
           </p>
 
           <form action={registerAction} className={styles.authForm}>
-            <input type="hidden" name="role" value="CUSTOMER" />
+            <input type="hidden" name="role" value="ARTISAN" />
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="name">Name</label>
@@ -35,17 +34,15 @@ export default function RegisterCustomerPage() {
               <input type="password" id="password" name="password" required className={styles.input} />
             </div>
 
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="profileImageUrl">Profile Photo URL (optional)</label>
+              <input type="url" id="profileImageUrl" name="profileImageUrl" placeholder="https://..." className={styles.input} />
+            </div>
+
             <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
-              Create Customer Account
+              Create Seller Account
             </button>
           </form>
-
-          <p className={styles.authHelp}>
-            Already have an account? <Link href="/login">Sign in</Link>
-          </p>
-          <p className={styles.authHelp} style={{ marginTop: "0.5rem" }}>
-            Want to sell? <Link href="/register/artisan">Become a seller</Link>
-          </p>
         </section>
       </main>
 

@@ -1,9 +1,10 @@
-import { registerAction } from "./actions";
+import { registerAction } from "../actions";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import styles from "@/app/auth-form.module.css";
+import Link from "next/link";
+import styles from "@/app/auth/auth-form.module.css";
 
-export default function RegisterPage() {
+export default function RegisterArtisanPage() {
   return (
     <>
       <Navbar />
@@ -12,6 +13,7 @@ export default function RegisterPage() {
         <section className={`${styles.authCard} surface-card`}>
           <span className="section-label">Become a Seller</span>
           <h1 className={`page-title ${styles.authTitle}`}>Create your artisan account</h1>
+
           <p className={`section-subtitle ${styles.authSubtitle}`}>
             Create an artisan account to manage your products, update your profile, and sell your handcrafted pieces.
           </p>
@@ -43,6 +45,13 @@ export default function RegisterPage() {
               Create Seller Account
             </button>
           </form>
+
+          <p className={styles.authHelp}>
+            Already have an account? <Link href="/auth/login">Sign in</Link>
+          </p>
+          <p className={`${styles.authHelp} ${styles.authHelpSecondary}`}>
+            Looking to buy? <Link href="/auth/register/customer">Create a customer account</Link>
+          </p>
         </section>
       </main>
 

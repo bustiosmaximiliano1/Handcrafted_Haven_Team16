@@ -71,3 +71,7 @@
   text-underline-offset: 0.2em;
   font-weight: 600;
 }
+
+.authHelpSecondary {
+  margin-top: 0.5rem;
+}

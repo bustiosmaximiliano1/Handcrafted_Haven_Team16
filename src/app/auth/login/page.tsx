@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
-import styles from "@/app/auth-form.module.css";
+import styles from "@/app/auth/auth-form.module.css";
 import LoginForm from "./LoginForm";
 
 export default function LoginPage() {
@@ -17,10 +17,10 @@ export default function LoginPage() {
           <LoginForm />
 
           <p className={styles.authHelp}>
-            No account? <Link href="/register/customer">Create one</Link>
+            No account? <Link href="/auth/register/customer">Create one</Link>
           </p>
-          <p className={styles.authHelp} style={{ marginTop: "0.5rem" }}>
-            Want to sell? <Link href="/register/artisan">Become a seller</Link>
+          <p className={`${styles.authHelp} ${styles.authHelpSecondary}`}>
+            Want to sell? <Link href="/auth/register/artisan">Become a seller</Link>
           </p>
         </section>
       </main>

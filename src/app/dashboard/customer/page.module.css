@@ -1,0 +1,34 @@
+.main {
+  padding-block: 3rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+  color: var(--ink-soft);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.cardLink,
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardText {
+  margin-bottom: 0;
+}

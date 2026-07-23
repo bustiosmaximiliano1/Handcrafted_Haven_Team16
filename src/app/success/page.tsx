@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import styles from "./page.module.css";
 
 interface SuccessPageProps {
   searchParams: Promise<{
@@ -19,22 +20,21 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   return (
     <>
       <Navbar />
-      <main className="container" style={{ maxWidth: "760px", margin: "4.5rem auto", paddingInline: "1.5rem" }}>
-        <section className="surface-card" style={{ padding: "2rem", textAlign: "center" }}>
+      <main className={`container ${styles.main}`}>
+        <section className={`surface-card ${styles.card}`}>
           <span className="section-label">Success</span>
 
-          <h1 className="page-title" style={{ marginTop: "0.8rem", marginBottom: "0.8rem" }}>
+          <h1 className={`page-title ${styles.title}`}>
             {message}
           </h1>
 
-          <p className="section-subtitle" style={{ marginBottom: "2rem" }}>
+          <p className={`section-subtitle ${styles.subtitle}`}>
             Everything is ready for the next step.
           </p>
 
           <Link
             href={redirectPath}
-            className="button button--primary button--subtle-lift"
-            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+            className={`button button--primary button--subtle-lift ${styles.button}`}
           >
             {buttonText}
           </Link>

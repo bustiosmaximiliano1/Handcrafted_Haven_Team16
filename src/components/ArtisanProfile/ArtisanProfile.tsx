@@ -47,7 +47,7 @@ export default function ArtisanProfile({ artisan }: ArtisanProfileProps) {
 
         <div className={styles.storyHeader}>
           <h2 className={styles.label}>Our Story & Craft</h2>
-          <p className={`${styles.subtitle} text-muted`} style={{ whiteSpace: "pre-line", marginBottom: 0 }}>
+          <p className={`${styles.subtitle} ${styles.storyText} text-muted`}>
             {artisan.bio || `Welcome to the craft space of ${artisan.name || "this artisan"}. Every piece in this collection is thoughtfully designed and handcrafted with quality, care, and attention to detail.`}
           </p>
         </div>
@@ -78,7 +78,7 @@ export default function ArtisanProfile({ artisan }: ArtisanProfileProps) {
                   </p>
                 </div>
 
-                <Link href={`/products/${product.id}`} className="button button--primary" style={{ width: "100%" }}>
+                <Link href={`/products/${product.id}`} className={`button button--primary ${styles.productButton}`}>
                   View Product
                 </Link>
               </div>

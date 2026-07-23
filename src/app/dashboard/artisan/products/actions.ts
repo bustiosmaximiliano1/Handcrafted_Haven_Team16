@@ -10,7 +10,7 @@ export async function deleteOwnProduct(id: string) {
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const artisan = await prisma.user.findUnique({
@@ -19,7 +19,7 @@ export async function deleteOwnProduct(id: string) {
   });
 
   if (!artisan || artisan.role !== "ARTISAN") {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const product = await prisma.product.findFirst({

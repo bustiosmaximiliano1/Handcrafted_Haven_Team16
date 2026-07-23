@@ -1,0 +1,15 @@
+.main {
+  padding: 2rem;
+}
+
+.clearFilterWrap {
+  margin-top: 0.75rem;
+}
+
+.clearFilterButton {
+  width: auto;
+}
+
+.emptyState {
+  margin-top: 1.5rem;
+}

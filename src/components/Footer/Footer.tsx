@@ -17,15 +17,15 @@ const columns = [
     links: [
       { label: "Products", href: "/products" },
       { label: "Artisans", href: "/artisans" },
-      { label: "Become a seller", href: "/register/artisan" },
+      { label: "Become a seller", href: "/auth/register/artisan" },
     ],
   },
   {
     heading: "Account",
     links: [
-      { label: "Sign in", href: "/login" },
-      { label: "Register as customer", href: "/register/customer" },
-      { label: "Register as artisan", href: "/register/artisan" },
+      { label: "Sign in", href: "/auth/login" },
+      { label: "Register as customer", href: "/auth/register/customer" },
+      { label: "Register as artisan", href: "/auth/register/artisan" },
     ],
   },
 ];

@@ -19,8 +19,8 @@ interface ProductData {
 interface ProductFormProps {
   initialData?: ProductData;
   categories: OptionItem[];
-  artisans?: OptionItem[]; // Ahora es opcional
-  defaultArtisanId?: string; // Para forzar el ID cuando edita un artesano
+  artisans?: OptionItem[];
+  defaultArtisanId?: string;
   action: (formData: FormData) => Promise<void>;
   buttonText?: string;
 }
@@ -33,7 +33,6 @@ export default function ProductForm({
   action,
   buttonText = "Save Changes",
 }: ProductFormProps) {
-  // Determinamos el ID del artesano asignado o por defecto
   const activeArtisanId = initialData?.artisanId || defaultArtisanId || "";
 
   return (
@@ -72,7 +71,6 @@ export default function ProductForm({
           </select>
         </div>
 
-        {/* Muestra el selector SOLO SI se proporciona la lista de artesanos (Vista Admin) */}
         {artisans ? (
           <div className={styles.group}>
             <label className={styles.label}>Artisan / Maker</label>
@@ -90,7 +88,6 @@ export default function ProductForm({
             </select>
           </div>
         ) : (
-          /* Vista Artesano: Se envía de forma transparente el ID del artesano */
           <input type="hidden" name="artisanId" value={activeArtisanId} />
         )}
 
@@ -136,29 +133,23 @@ export default function ProductForm({
             placeholder="https://plus.unsplash.com/premium_photo-1714943792698-04676952002e?auto=format&fit=crop&w=800&q=80"
             className={styles.input}
           />
-          <p
-            style={{
-              marginTop: "0.5rem",
-              fontSize: "0.9rem",
-              color: "#4b5563",
-            }}
-          >
+          <p className={styles.helperText}>
             Example:{" "}
             https://plus.unsplash.com/premium_photo-1714943792698-04676952002e?auto=format&fit=crop&w=800&q=80
           </p>
-          <p style={{ marginTop: "0.5rem", fontSize: "0.9rem", color: "#4b5563" }}>
+          <p className={styles.helperText}>
             Hey seller, from Team 16 we want to share with you some great places where you can find lovely images for your product.
           </p>
-          <p style={{ marginTop: "0.5rem", fontSize: "0.9rem", color: "#4b5563" }}>
+          <p className={styles.helperText}>
             You can explore:
-            <a href="https://unsplash.com" target="_blank" rel="noreferrer" style={{ color: "#2563eb", marginLeft: "0.25rem" }}>
+            <a href="https://unsplash.com" target="_blank" rel="noreferrer" className={styles.helperLink}>
               Unsplash
             </a>,
-            <a href="https://www.pexels.com" target="_blank" rel="noreferrer" style={{ color: "#2563eb", marginLeft: "0.25rem" }}>
+            <a href="https://www.pexels.com" target="_blank" rel="noreferrer" className={styles.helperLink}>
               Pexels
             </a>,
             and
-            <a href="https://pixabay.com" target="_blank" rel="noreferrer" style={{ color: "#2563eb", marginLeft: "0.25rem" }}>
+            <a href="https://pixabay.com" target="_blank" rel="noreferrer" className={styles.helperLink}>
               Pixabay
             </a>.
           </p>
