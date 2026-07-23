@@ -53,7 +53,7 @@ export async function deleteProduct(id: string) {
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const user = await prisma.user.findUnique({

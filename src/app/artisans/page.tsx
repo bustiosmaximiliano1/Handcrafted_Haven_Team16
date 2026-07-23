@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ArtisanCard from "@/components/ArtisanCard/ArtisanCard";
 import { prisma } from "@/lib/prisma";
+import styles from "./page.module.css";
 
 export default async function ArtisansListPage() {
   const artisans = await prisma.user.findMany({
@@ -22,8 +23,8 @@ export default async function ArtisansListPage() {
   return (
     <>
       <Navbar />
-      <main style={{ maxWidth: "1200px", margin: "2.5rem auto", padding: "0 1.5rem" }}>
-        <header style={{ marginBottom: "2.5rem", textAlign: "center" }}>
+      <main className={styles.main}>
+        <header className={styles.header}>
           <h1 className="page-title">Meet Our Artisans</h1>
           <p className="section-subtitle">
             Discover the talented creators behind our handcrafted items and read their stories.
@@ -31,17 +32,11 @@ export default async function ArtisansListPage() {
         </header>
 
         {artisans.length === 0 ? (
-          <p className="section-subtitle" style={{ textAlign: "center" }}>
+          <p className={`section-subtitle ${styles.empty}`}>
             No artisans found at the moment.
           </p>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "1.5rem",
-            }}
-          >
+          <div className={styles.grid}>
             {artisans.map((artisan) => (
               <ArtisanCard
                 key={artisan.id}

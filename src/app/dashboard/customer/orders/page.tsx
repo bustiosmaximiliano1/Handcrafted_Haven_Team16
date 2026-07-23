@@ -3,13 +3,14 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
+import styles from "./page.module.css";
 
 export default async function CustomerOrdersPage() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -36,22 +37,15 @@ export default async function CustomerOrdersPage() {
     <>
       <Navbar />
 
-      <main className="container" style={{ paddingBlock: "3rem" }}>
-        <h1 style={{ marginBottom: "1rem" }}>Your Orders</h1>
+      <main className={`container ${styles.main}`}>
+        <h1 className={styles.title}>Your Orders</h1>
 
         {orders.length === 0 ? (
           <p>You have no orders yet.</p>
         ) : (
-          <div style={{ display: "grid", gap: "1rem" }}>
+          <div className={styles.grid}>
             {orders.map((order) => (
-              <div
-                key={order.id}
-                style={{
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "12px",
-                  padding: "1rem",
-                }}
-              >
+              <div key={order.id} className={styles.orderCard}>
                 <strong>Order #{order.id.slice(0, 8)}</strong>
                 <p>Status: {order.status}</p>
                 <p>Total: ${Number(order.total).toFixed(2)}</p>

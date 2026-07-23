@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client"; // <-- Importamos Role
 import { notFound } from "next/navigation";
 import { updateProduct } from "../../actions";
+import styles from "./page.module.css";
 
 interface EditProductPageProps {
   params: Promise<{ id: string }>;
@@ -35,7 +36,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     <>
       <Navbar />
 
-      <main className="container" style={{ paddingBlock: "3rem" }}>
+      <main className={`container ${styles.main}`}>
         <h1 className="page-title">Edit Product</h1>
 
         <ProductForm

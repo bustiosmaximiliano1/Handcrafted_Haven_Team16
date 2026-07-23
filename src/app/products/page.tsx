@@ -3,6 +3,7 @@ import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
+import styles from "./page.module.css";
 
 // Explicit interfaces to satisfy strict TypeScript checks
 interface ProductImage {
@@ -56,7 +57,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     <>
       <Navbar />
 
-      <main className="products-page" style={{ padding: "2rem" }}>
+      <main className={`products-page ${styles.main}`}>
         <h1 className="page-title">Our Handcrafted Products</h1>
         <p className="section-subtitle">
           {activeCategory
@@ -65,8 +66,8 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         </p>
 
         {activeCategory && (
-          <div style={{ marginTop: "0.75rem" }}>
-            <Link href="/products" className="button button--secondary" style={{ width: "auto" }}>
+          <div className={styles.clearFilterWrap}>
+            <Link href="/products" className={`button button--secondary ${styles.clearFilterButton}`}>
               Clear filter
             </Link>
           </div>
@@ -101,7 +102,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         </div>
 
         {products.length === 0 && (
-          <p className="section-subtitle" style={{ marginTop: "1.5rem" }}>
+          <p className={`section-subtitle ${styles.emptyState}`}>
             No products found for this category yet.
           </p>
         )}

@@ -5,13 +5,14 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
 import { deleteOwnProduct } from "./actions";
+import styles from "./page.module.css";
 
 export default async function ArtisanProductsPage() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const artisan = await prisma.user.findUnique({
@@ -19,7 +20,7 @@ export default async function ArtisanProductsPage() {
   });
 
   if (!artisan || artisan.role !== "ARTISAN") {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const products = await prisma.product.findMany({
@@ -31,9 +32,9 @@ export default async function ArtisanProductsPage() {
   return (
     <>
       <Navbar />
-      <main style={{ maxWidth: "1000px", margin: "2rem auto", padding: "0 1.5rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-          <h1 className="page-title" style={{ marginBottom: 0 }}>My Products</h1>
+      <main className={styles.main}>
+        <div className={styles.header}>
+          <h1 className={`page-title ${styles.title}`}>My Products</h1>
           <Link
             href="/dashboard/artisan/products/new"
             className="button button--primary"
@@ -45,53 +46,35 @@ export default async function ArtisanProductsPage() {
         {products.length === 0 ? (
           <p className="section-subtitle">You have not added any products yet.</p>
         ) : (
-          <div className="surface-card" style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+          <div className={`surface-card ${styles.tableWrap}`}>
+            <table className={styles.table}>
               <thead>
-                <tr style={{ borderBottom: "1px solid var(--line)" }}>
-                  <th style={{ padding: "0.9rem" }}>Name</th>
-                  <th style={{ padding: "0.9rem" }}>Category</th>
-                  <th style={{ padding: "0.9rem" }}>Price</th>
-                  <th style={{ padding: "0.9rem" }}>Stock</th>
-                  <th style={{ padding: "0.9rem" }}>Actions</th>
+                <tr className={styles.row}>
+                  <th className={styles.cell}>Name</th>
+                  <th className={styles.cell}>Category</th>
+                  <th className={styles.cell}>Price</th>
+                  <th className={styles.cell}>Stock</th>
+                  <th className={styles.cell}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {products.map((product) => (
-                  <tr key={product.id} style={{ borderBottom: "1px solid var(--line)" }}>
-                    <td style={{ padding: "0.9rem" }}>
-                      <Link
-                        href={`/products/${product.id}`}
-                        style={{ color: "var(--ink)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "0.2em" }}
-                      >
+                  <tr key={product.id} className={styles.row}>
+                    <td className={styles.cell}>
+                      <Link href={`/products/${product.id}`} className={styles.productLink}>
                         {product.name}
                       </Link>
                     </td>
-                    <td style={{ padding: "0.9rem", color: "var(--ink-soft)" }}>{product.category?.name || "Uncategorized"}</td>
-                    <td style={{ padding: "0.9rem" }}>${product.price.toString()}</td>
-                    <td style={{ padding: "0.9rem" }}>{product.stock}</td>
-                    <td style={{ padding: "0.9rem" }}>
-                      <div style={{ display: "flex", gap: "0.9rem", alignItems: "center", flexWrap: "wrap" }}>
-                        <Link
-                          href={`/dashboard/artisan/products/${product.id}/edit`}
-                          style={{ color: "var(--ink)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "0.2em" }}
-                        >
+                    <td className={`${styles.cell} ${styles.muted}`}>{product.category?.name || "Uncategorized"}</td>
+                    <td className={styles.cell}>${product.price.toString()}</td>
+                    <td className={styles.cell}>{product.stock}</td>
+                    <td className={styles.cell}>
+                      <div className={styles.actions}>
+                        <Link href={`/dashboard/artisan/products/${product.id}/edit`} className={styles.editLink}>
                           Edit
                         </Link>
                         <form action={deleteOwnProduct.bind(null, product.id)}>
-                          <button
-                            type="submit"
-                            style={{
-                              border: "none",
-                              background: "transparent",
-                              color: "#b42318",
-                              cursor: "pointer",
-                              textDecoration: "underline",
-                              textUnderlineOffset: "0.2em",
-                              padding: 0,
-                              font: "inherit",
-                            }}
-                          >
+                          <button type="submit" className={styles.deleteButton}>
                             Delete
                           </button>
                         </form>

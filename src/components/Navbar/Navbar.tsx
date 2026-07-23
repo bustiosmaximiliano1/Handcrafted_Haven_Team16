@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
-import { logoutAction } from "@/app/login/actions";
+import { logoutAction } from "@/app/auth/login/actions";
 import { prisma } from "@/lib/prisma";
 import styles from "./Navbar.module.css";
 
@@ -30,7 +30,7 @@ export default async function Navbar() {
         <nav className={styles.nav} aria-label="Primary">
           <Link href="/products">Products</Link>
           <Link href="/artisans">Artisans</Link>
-          <Link href="/register/artisan">Become a seller</Link>
+          <Link href="/auth/register/artisan">Become a seller</Link>
 
           {isArtisan && (
             <>
@@ -59,7 +59,7 @@ export default async function Navbar() {
               </button>
             </form>
           ) : (
-            <Link href="/login" className={styles.authLink}>
+            <Link href="/auth/login" className={styles.authLink}>
               Login
             </Link>
           )}

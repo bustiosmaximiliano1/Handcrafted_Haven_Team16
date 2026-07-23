@@ -4,13 +4,14 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
+import styles from "./page.module.css";
 
 export default async function CustomerDashboardPage() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -25,34 +26,26 @@ export default async function CustomerDashboardPage() {
     <>
       <Navbar />
 
-      <main className="container" style={{ paddingBlock: "3rem" }}>
-        <h1 style={{ marginBottom: "1rem" }}>Customer Dashboard</h1>
-        <p style={{ marginBottom: "2rem", color: "var(--ink-soft)" }}>
+      <main className={`container ${styles.main}`}>
+        <h1 className={styles.title}>Customer Dashboard</h1>
+        <p className={styles.subtitle}>
           Welcome back to Handcrafted Haven. Explore handcrafted products and artisan stories.
         </p>
 
-        <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))" }}>
-          <Link
-            href="/products"
-            style={{ border: "1px solid #e5e7eb", borderRadius: "12px", padding: "1rem", textDecoration: "none", color: "inherit" }}
-          >
+        <div className={styles.grid}>
+          <Link href="/products" className={styles.cardLink}>
             <strong>Shop Products</strong>
-            <p style={{ marginBottom: 0 }}>Browse the full catalog and discover handmade pieces.</p>
+            <p className={styles.cardText}>Browse the full catalog and discover handmade pieces.</p>
           </Link>
 
-          <Link
-            href="/artisans"
-            style={{ border: "1px solid #e5e7eb", borderRadius: "12px", padding: "1rem", textDecoration: "none", color: "inherit" }}
-          >
+          <Link href="/artisans" className={styles.cardLink}>
             <strong>Meet Artisans</strong>
-            <p style={{ marginBottom: 0 }}>Discover the makers behind the collections.</p>
+            <p className={styles.cardText}>Discover the makers behind the collections.</p>
           </Link>
 
-          <div
-            style={{ border: "1px solid #e5e7eb", borderRadius: "12px", padding: "1rem" }}
-          >
+          <div className={styles.card}>
             <strong>Your Account</strong>
-            <p style={{ marginBottom: 0 }}>Use your customer profile to keep browsing and exploring the marketplace.</p>
+            <p className={styles.cardText}>Use your customer profile to keep browsing and exploring the marketplace.</p>
           </div>
         </div>
       </main>

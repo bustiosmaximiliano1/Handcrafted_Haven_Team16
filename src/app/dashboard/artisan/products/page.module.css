@@ -1,0 +1,64 @@
+.main {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.row {
+  border-bottom: 1px solid var(--line);
+}
+
+.cell {
+  padding: 0.9rem;
+}
+
+.productLink,
+.editLink {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.deleteButton {
+  border: none;
+  background: transparent;
+  color: #b42318;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  padding: 0;
+  font: inherit;
+}

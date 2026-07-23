@@ -5,13 +5,14 @@ import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { deleteProduct } from "./actions";
+import styles from "./page.module.css";
 
 export default async function AdminProductsPage() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -34,42 +35,21 @@ export default async function AdminProductsPage() {
     <>
       <Navbar />
 
-      <main className="container" style={{ paddingBlock: "3rem" }}>
-        <h1 style={{ marginBottom: "1.5rem" }}>Admin Products</h1>
+      <main className={`container ${styles.main}`}>
+        <h1 className={styles.title}>Admin Products</h1>
 
-        <div style={{ display: "grid", gap: "1rem" }}>
+        <div className={styles.grid}>
           {products.map((product) => (
-            <div
-              key={product.id}
-              style={{
-                border: "1px solid #e5e7eb",
-                borderRadius: "12px",
-                padding: "1rem",
-                display: "grid",
-                gap: "0.35rem",
-              }}
-            >
+            <div key={product.id} className={styles.card}>
               <strong>{product.name}</strong>
               <span>Category: {product.category?.name || "Uncategorized"}</span>
               <span>Artisan: {product.artisan?.name || "Unknown"}</span>
               <span>Price: ${product.price.toString()}</span>
               <span>Stock: {product.stock}</span>
-              <div style={{ display: "flex", gap: "0.85rem", alignItems: "center", flexWrap: "wrap" }}>
+              <div className={styles.actions}>
                 <Link href={`/dashboard/admin/products/${product.id}/edit`}>Edit product</Link>
                 <form action={deleteProduct.bind(null, product.id)}>
-                  <button
-                    type="submit"
-                    style={{
-                      border: "none",
-                      background: "transparent",
-                      color: "#b42318",
-                      cursor: "pointer",
-                      textDecoration: "underline",
-                      textUnderlineOffset: "0.2em",
-                      padding: 0,
-                      font: "inherit",
-                    }}
-                  >
+                  <button type="submit" className={styles.deleteButton}>
                     Delete product
                   </button>
                 </form>

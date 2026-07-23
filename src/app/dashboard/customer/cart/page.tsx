@@ -4,13 +4,14 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
 import { checkoutCartAction } from "./actions";
+import styles from "./page.module.css";
 
 export default async function CustomerCartPage() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -38,44 +39,26 @@ export default async function CustomerCartPage() {
     <>
       <Navbar />
 
-      <main className="container" style={{ paddingBlock: "3rem" }}>
-        <h1 style={{ marginBottom: "1rem" }}>Your Cart</h1>
+      <main className={`container ${styles.main}`}>
+        <h1 className={styles.title}>Your Cart</h1>
 
         {!cart || cart.items.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
-          <div style={{ display: "grid", gap: "1rem" }}>
+          <div className={styles.grid}>
             {cart.items.map((item) => (
-              <div
-                key={item.id}
-                style={{
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "12px",
-                  padding: "1rem",
-                }}
-              >
+              <div key={item.id} className={styles.item}>
                 <strong>{item.product.name}</strong>
-                <p style={{ marginBottom: 0 }}>
+                <p className={styles.itemText}>
                   Quantity: {item.quantity} · Price: ${item.product.price.toString()}
                 </p>
               </div>
             ))}
 
-            <div style={{ fontWeight: 700, marginTop: "0.5rem" }}>Total: ${total.toFixed(2)}</div>
+            <div className={styles.total}>Total: ${total.toFixed(2)}</div>
 
             <form action={checkoutCartAction}>
-              <button
-                type="submit"
-                style={{
-                  marginTop: "0.5rem",
-                  padding: "0.75rem 1.25rem",
-                  borderRadius: "999px",
-                  background: "var(--pine)",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
+              <button type="submit" className={styles.checkoutButton}>
                 Checkout
               </button>
             </form>

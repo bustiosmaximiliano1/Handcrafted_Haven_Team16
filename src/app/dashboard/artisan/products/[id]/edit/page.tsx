@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import ProductForm from "@/components/ProductForm/ProductForm";
 import { prisma } from "@/lib/prisma";
 import { normalizeProductImageUrl } from "@/lib/product-image-url";
+import styles from "./page.module.css";
 
 interface EditProductProps {
   params: Promise<{ id: string }>;
@@ -17,7 +18,7 @@ export default async function EditArtisanProductPage({ params }: EditProductProp
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const artisan = await prisma.user.findUnique({
@@ -25,7 +26,7 @@ export default async function EditArtisanProductPage({ params }: EditProductProp
   });
 
   if (!artisan || artisan.role !== "ARTISAN") {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const product = await prisma.product.findFirst({
@@ -91,8 +92,8 @@ export default async function EditArtisanProductPage({ params }: EditProductProp
   return (
     <>
       <Navbar />
-      <main style={{ maxWidth: "800px", margin: "2rem auto", padding: "0 1.5rem" }}>
-        <h1 style={{ fontSize: "1.75rem", fontWeight: "700", marginBottom: "1.5rem" }}>
+      <main className={styles.main}>
+        <h1 className={styles.title}>
           Edit Product
         </h1>
 

@@ -3,13 +3,14 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
+import styles from "./page.module.css";
 
 export default async function CustomerProfilePage() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -24,9 +25,9 @@ export default async function CustomerProfilePage() {
     <>
       <Navbar />
 
-      <main className="container" style={{ paddingBlock: "3rem" }}>
+      <main className={`container ${styles.main}`}>
         <h1 className="page-title">My Profile</h1>
-        <div className="surface-card" style={{ padding: "1rem" }}>
+        <div className={`surface-card ${styles.card}`}>
           <p><strong>Name:</strong> {user.name || "—"}</p>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Role:</strong> {user.role}</p>

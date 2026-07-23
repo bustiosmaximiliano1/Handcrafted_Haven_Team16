@@ -1,0 +1,18 @@
+.main {
+  padding-block: 3rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.orderCard {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+}

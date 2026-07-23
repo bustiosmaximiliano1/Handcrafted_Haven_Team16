@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { loginAction, type LoginActionState } from "./actions";
-import styles from "@/app/auth-form.module.css";
+import styles from "@/app/auth/auth-form.module.css";
 
 const initialState: LoginActionState = {
   error: null,

@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import styles from "@/app/page.module.css";
+import styles from "./ProfilePage.module.css";
 
 // Server Action to update the profile
 async function updateProfile(formData: FormData) {
@@ -40,7 +40,7 @@ export default async function ArtisanProfileEditPage() {
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const artisan = await prisma.user.findUnique({
@@ -48,27 +48,24 @@ export default async function ArtisanProfileEditPage() {
   });
 
   if (!artisan || artisan.role !== "ARTISAN") {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   return (
     <>
       <Navbar />
-      <main className="container" style={{ maxWidth: "760px", margin: "3.5rem auto", paddingInline: "1.5rem" }}>
-        <section
-          className={styles.card}
-          style={{ border: "none", boxShadow: "none", background: "transparent", padding: 0 }}
-        >
+      <main className={`container ${styles.main}`}>
+        <section className={styles.card}>
           <span className="section-label">Account Settings</span>
-          <h1 className="page-title" style={{ marginTop: "0.8rem" }}>Edit Your Artisan Profile</h1>
-          <p className="section-subtitle" style={{ marginBottom: "2rem" }}>
+          <h1 className={`page-title ${styles.title}`}>Edit Your Artisan Profile</h1>
+          <p className={`section-subtitle ${styles.subtitle}`}>
             Update your public name and share your story with customers visiting your profile.
           </p>
 
-          <form action={updateProfile} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          <form action={updateProfile} className={styles.form}>
             <input type="hidden" name="userId" value={artisan.id} />
 
-            <div>
+            <div className={styles.field}>
               <label className={styles.label} htmlFor="name">
                 Artisan Name
               </label>
@@ -78,20 +75,11 @@ export default async function ArtisanProfileEditPage() {
                 name="name"
                 defaultValue={artisan.name || ""}
                 required
-                style={{
-                  width: "100%",
-                  padding: "0.85rem",
-                  borderRadius: "var(--radius)",
-                  border: "1px solid var(--line)",
-                  background: "var(--paper)",
-                  color: "var(--ink)",
-                  fontSize: "1rem",
-                  marginTop: "0.5rem",
-                }}
+                className={styles.input}
               />
             </div>
 
-            <div>
+            <div className={styles.field}>
               <label className={styles.label} htmlFor="bio">
                 Our Story & Craft (Bio)
               </label>
@@ -101,22 +89,11 @@ export default async function ArtisanProfileEditPage() {
                 rows={6}
                 defaultValue={artisan.bio || ""}
                 placeholder="Tell customers about your background, materials, and passion for crafting..."
-                style={{
-                  width: "100%",
-                  padding: "0.85rem",
-                  borderRadius: "var(--radius)",
-                  border: "1px solid var(--line)",
-                  background: "var(--paper)",
-                  color: "var(--ink)",
-                  fontSize: "1rem",
-                  marginTop: "0.5rem",
-                  fontFamily: "inherit",
-                  lineHeight: "1.6",
-                }}
+                className={styles.textarea}
               />
             </div>
 
-            <div>
+            <div className={styles.field}>
               <label className={styles.label} htmlFor="profileImageUrl">
                 Profile Photo URL
               </label>
@@ -126,20 +103,11 @@ export default async function ArtisanProfileEditPage() {
                 name="profileImageUrl"
                 defaultValue={artisan.profileImageUrl || ""}
                 placeholder="https://..."
-                style={{
-                  width: "100%",
-                  padding: "0.85rem",
-                  borderRadius: "var(--radius)",
-                  border: "1px solid var(--line)",
-                  background: "var(--paper)",
-                  color: "var(--ink)",
-                  fontSize: "1rem",
-                  marginTop: "0.5rem",
-                }}
+                className={styles.input}
               />
             </div>
 
-            <button type="submit" className="button button--primary button--subtle-lift" style={{ alignSelf: "flex-start" }}>
+            <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
               Save Changes
             </button>
           </form>

@@ -85,5 +85,5 @@ export async function logoutAction() {
   const cookieStore = await cookies();
   cookieStore.delete("userId");
 
-  redirect("/logout");
+  redirect("/auth/logout");
 }
