@@ -1,6 +1,7 @@
 import { registerAction } from "../actions";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import Link from "next/link";
 import styles from "@/app/auth-form.module.css";
 
 export default function RegisterCustomerPage() {
@@ -38,6 +39,13 @@ export default function RegisterCustomerPage() {
               Create Customer Account
             </button>
           </form>
+
+          <p className={styles.authHelp}>
+            Already have an account? <Link href="/login">Sign in</Link>
+          </p>
+          <p className={styles.authHelp} style={{ marginTop: "0.5rem" }}>
+            Want to sell? <Link href="/register/artisan">Become a seller</Link>
+          </p>
         </section>
       </main>
 
