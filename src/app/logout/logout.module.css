@@ -1,0 +1,61 @@
+.main {
+  min-height: clamp(58vh, 64vh, 72vh);
+  display: grid;
+  place-items: center;
+  padding-block: clamp(2rem, 6vw, 4.25rem);
+}
+
+.card {
+  width: min(100%, 640px);
+  padding: clamp(1.2rem, 3.5vw, 2.2rem);
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.title {
+  margin-top: 0.9rem;
+  margin-bottom: 0.65rem;
+  font-size: clamp(1.8rem, 4.8vw, 2.45rem);
+}
+
+.subtitle {
+  max-width: 44ch;
+  margin: 0 auto 1.6rem;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.secondaryLink {
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 520px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions a {
+    width: 100%;
+  }
+}
