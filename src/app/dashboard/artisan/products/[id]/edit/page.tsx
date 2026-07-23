@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -7,7 +7,12 @@ import ProductForm from "@/components/ProductForm/ProductForm";
 import { prisma } from "@/lib/prisma";
 import { normalizeProductImageUrl } from "@/lib/product-image-url";
 
-export default async function NewArtisanProductPage() {
+interface EditProductProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function EditArtisanProductPage({ params }: EditProductProps) {
+  const { id } = await params;
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
@@ -23,12 +28,26 @@ export default async function NewArtisanProductPage() {
     redirect("/login");
   }
 
+  const product = await prisma.product.findFirst({
+    where: {
+      id,
+      artisanId: artisan.id,
+    },
+    include: {
+      images: true,
+    },
+  });
+
+  if (!product) {
+    notFound();
+  }
+
   const categories = await prisma.category.findMany({
     select: { id: true, name: true },
     orderBy: { name: "asc" },
   });
 
-  async function createProduct(formData: FormData) {
+  async function updateProduct(formData: FormData) {
     "use server";
 
     if (!artisan) return;
@@ -41,28 +60,29 @@ export default async function NewArtisanProductPage() {
     const imageUrl = formData.get("imageUrl") as string | null;
     const normalizedImageUrl = normalizeProductImageUrl(imageUrl);
 
-    await prisma.product.create({
+    await prisma.product.update({
+      where: { id },
       data: {
         name,
         price,
         stock,
         description,
         categoryId: categoryId || null,
-        artisanId: artisan.id,
         images: normalizedImageUrl
           ? {
+              deleteMany: {},
               create: [{ url: normalizedImageUrl }],
             }
           : undefined,
       },
     });
 
-    revalidatePath("/artisan/products");
+    revalidatePath("/dashboard/artisan/products");
     redirect(
       "/success?message=" +
-        encodeURIComponent("Your product was created successfully.") +
+        encodeURIComponent("Your product was updated successfully.") +
         "&redirect=" +
-        encodeURIComponent("/artisan/products") +
+        encodeURIComponent("/dashboard/artisan/products") +
         "&buttonText=" +
         encodeURIComponent("Return to Dashboard")
     );
@@ -73,14 +93,15 @@ export default async function NewArtisanProductPage() {
       <Navbar />
       <main style={{ maxWidth: "800px", margin: "2rem auto", padding: "0 1.5rem" }}>
         <h1 style={{ fontSize: "1.75rem", fontWeight: "700", marginBottom: "1.5rem" }}>
-          Add New Product
+          Edit Product
         </h1>
 
         <ProductForm
+          initialData={product}
           categories={categories}
           defaultArtisanId={artisan.id}
-          action={createProduct}
-          buttonText="Save Product"
+          action={updateProduct}
+          buttonText="Save Changes"
         />
       </main>
       <Footer />

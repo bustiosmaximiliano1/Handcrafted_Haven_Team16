@@ -53,7 +53,7 @@ export default async function AdminProductsPage() {
               <span>Artisan: {product.artisan?.name || "Unknown"}</span>
               <span>Price: ${product.price.toString()}</span>
               <span>Stock: {product.stock}</span>
-              <Link href={`/admin/products/${product.id}/edit`}>Edit product</Link>
+              <Link href={`/dashboard/admin/products/${product.id}/edit`}>Edit product</Link>
             </div>
           ))}
         </div>

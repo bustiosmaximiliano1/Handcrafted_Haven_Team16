@@ -32,7 +32,7 @@ export async function checkoutCartAction() {
   });
 
   if (!cart || cart.items.length === 0) {
-    redirect("/customer/cart");
+    redirect("/dashboard/customer/cart");
   }
 
   const total = cart.items.reduce((sum, item) => sum + Number(item.product.price) * item.quantity, 0);
@@ -63,7 +63,7 @@ export async function checkoutCartAction() {
     "/success?message=" +
       encodeURIComponent("Your order has been placed successfully.") +
       "&redirect=" +
-      encodeURIComponent("/customer/orders") +
+      encodeURIComponent("/dashboard/customer/orders") +
       "&buttonText=" +
       encodeURIComponent("View Orders")
   );

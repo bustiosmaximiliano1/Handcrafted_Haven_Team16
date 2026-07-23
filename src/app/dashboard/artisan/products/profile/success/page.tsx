@@ -14,7 +14,7 @@ export default function ArtisanProfileSuccessPage() {
         </p>
 
         <Link
-          href="/artisan/products"
+              href="/dashboard/artisan/products"
           className={`${styles.submitBtn} button button--primary`}
           style={{ display: "inline-flex", alignItems: "center", justifyContent: "center" }}
         >
