@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { deleteProduct } from "./actions";
 
 export default async function AdminProductsPage() {
   const cookieStore = await cookies();
@@ -53,7 +54,26 @@ export default async function AdminProductsPage() {
               <span>Artisan: {product.artisan?.name || "Unknown"}</span>
               <span>Price: ${product.price.toString()}</span>
               <span>Stock: {product.stock}</span>
-              <Link href={`/dashboard/admin/products/${product.id}/edit`}>Edit product</Link>
+              <div style={{ display: "flex", gap: "0.85rem", alignItems: "center", flexWrap: "wrap" }}>
+                <Link href={`/dashboard/admin/products/${product.id}/edit`}>Edit product</Link>
+                <form action={deleteProduct.bind(null, product.id)}>
+                  <button
+                    type="submit"
+                    style={{
+                      border: "none",
+                      background: "transparent",
+                      color: "#b42318",
+                      cursor: "pointer",
+                      textDecoration: "underline",
+                      textUnderlineOffset: "0.2em",
+                      padding: 0,
+                      font: "inherit",
+                    }}
+                  >
+                    Delete product
+                  </button>
+                </form>
+              </div>
             </div>
           ))}
         </div>

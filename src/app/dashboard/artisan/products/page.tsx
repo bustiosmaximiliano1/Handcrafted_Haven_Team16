@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
+import { deleteOwnProduct } from "./actions";
 
 export default async function ArtisanProductsPage() {
   const cookieStore = await cookies();
@@ -70,12 +71,31 @@ export default async function ArtisanProductsPage() {
                     <td style={{ padding: "0.9rem" }}>${product.price.toString()}</td>
                     <td style={{ padding: "0.9rem" }}>{product.stock}</td>
                     <td style={{ padding: "0.9rem" }}>
-                      <Link
-                        href={`/dashboard/artisan/products/${product.id}/edit`}
-                        style={{ color: "var(--ink)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "0.2em" }}
-                      >
-                        Edit
-                      </Link>
+                      <div style={{ display: "flex", gap: "0.9rem", alignItems: "center", flexWrap: "wrap" }}>
+                        <Link
+                          href={`/dashboard/artisan/products/${product.id}/edit`}
+                          style={{ color: "var(--ink)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "0.2em" }}
+                        >
+                          Edit
+                        </Link>
+                        <form action={deleteOwnProduct.bind(null, product.id)}>
+                          <button
+                            type="submit"
+                            style={{
+                              border: "none",
+                              background: "transparent",
+                              color: "#b42318",
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                              textUnderlineOffset: "0.2em",
+                              padding: 0,
+                              font: "inherit",
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                 ))}
