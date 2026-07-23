@@ -9,7 +9,8 @@ import { normalizeProfileImageUrl } from "@/lib/profile-image-url";
 
 export async function registerAction(formData: FormData) {
   const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
+  const emailInput = formData.get("email") as string;
+  const email = emailInput?.trim().toLowerCase();
   const password = formData.get("password") as string;
   const roleValue = (formData.get("role") as string) || "CUSTOMER";
   const profileImageUrlInput = formData.get("profileImageUrl") as string | null;
@@ -25,8 +26,13 @@ export async function registerAction(formData: FormData) {
     throw new Error("Please provide a valid profile image URL.");
   }
 
-  const existingUser = await prisma.user.findUnique({
-    where: { email },
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      email: {
+        equals: email,
+        mode: "insensitive",
+      },
+    },
   });
 
   if (existingUser) {

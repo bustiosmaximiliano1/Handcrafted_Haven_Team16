@@ -14,15 +14,21 @@ export async function loginAction(
   _prevState: LoginActionState,
   formData: FormData
 ): Promise<LoginActionState> {
-  const email = formData.get("email") as string;
+  const emailInput = formData.get("email") as string;
+  const email = emailInput?.trim().toLowerCase();
   const password = formData.get("password") as string;
 
   if (!email || !password) {
     return { error: "Please provide both email and password." };
   }
 
-  const user = await prisma.user.findUnique({
-    where: { email },
+  const user = await prisma.user.findFirst({
+    where: {
+      email: {
+        equals: email,
+        mode: "insensitive",
+      },
+    },
   });
 
   if (!user) {
