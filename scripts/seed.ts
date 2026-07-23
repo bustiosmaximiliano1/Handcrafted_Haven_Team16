@@ -16,55 +16,44 @@ async function main() {
   // 0. Create Artisans (Users with ARTISAN role)
   const ceramicsArtisan = await prisma.user.create({
     data: {
-      email: "elena.ceramics@handcrafted.com",
+      email: "maximiliano.bustios@handcrafted.com",
       password: passwordHash,
-      name: "Elena Rostova",
-      bio: "Crafting minimalist ceramics inspired by nature and earthy textures for over 10 years.",
-      profileImageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+      name: "Maximiliano Bustios",
+      bio: "Hi, I'm Maximiliano. I love building clean, practical products and creating handcrafted pieces that mix simplicity with purpose.",
+      profileImageUrl: "https://avatars.githubusercontent.com/u/282115791?v=4",
       role: Role.ARTISAN,
     },
   });
 
   const woodworkArtisan = await prisma.user.create({
     data: {
-      email: "lucas.wood@handcrafted.com",
+      email: "analina.nielsen@handcrafted.com",
       password: passwordHash,
-      name: "Lucas Vance",
-      bio: "Working with sustainable local lumber to create durable, timeless kitchenware.",
-      profileImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      name: "Analina Nielsen",
+      bio: "Hi, I'm Analina. I enjoy thoughtful design and warm details, and I focus on pieces that feel personal, useful, and lasting.",
+      profileImageUrl: "https://avatars.githubusercontent.com/u/145632655?v=4",
       role: Role.ARTISAN,
     },
   });
 
   const textilesArtisan = await prisma.user.create({
     data: {
-      email: "aisha.textiles@handcrafted.com",
+      email: "emil.roding@handcrafted.com",
       password: passwordHash,
-      name: "Aisha Patel",
-      bio: "Passionate about traditional weaving techniques combined with modern eco-friendly fabrics.",
-      profileImageUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80",
+      name: "Emil Roding",
+      bio: "Hi, I'm Emil. I like combining creativity with precision, making handmade work that reflects quality, balance, and care.",
+      profileImageUrl: "https://avatars.githubusercontent.com/u/179884635?v=4",
       role: Role.ARTISAN,
     },
   });
 
   const jewelryArtisan = await prisma.user.create({
     data: {
-      email: "mateo.jewelry@handcrafted.com",
+      email: "victor.vega@handcrafted.com",
       password: passwordHash,
-      name: "Mateo Silva",
-      bio: "Designing delicate pieces influenced by organic forms and precious natural stones.",
-      profileImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
-      role: Role.ARTISAN,
-    },
-  });
-
-  const homeDecorArtisan = await prisma.user.create({
-    data: {
-      email: "sophia.decor@handcrafted.com",
-      password: passwordHash,
-      name: "Sophia Chen",
-      bio: "Creating cozy, handcrafted home accents designed to bring warmth into every corner.",
-      profileImageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+      name: "Victor Vega",
+      bio: "Hi, I'm Victor. I enjoy shaping ideas into unique handmade pieces and sharing stories through every texture, color, and finish.",
+      profileImageUrl: "https://avatars.githubusercontent.com/u/132124006?v=4",
       role: Role.ARTISAN,
     },
   });
@@ -211,7 +200,7 @@ async function main() {
             name: "Handmade Soy Candle",
             description: "Lavender-scented candle in a reusable glass jar.",
             price: 22.00,
-            artisanId: homeDecorArtisan.id,
+            artisanId: jewelryArtisan.id,
             images: {
               create: [
                 { url: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80" }
@@ -222,10 +211,43 @@ async function main() {
             name: "Macrame Wall Hanging",
             description: "Boho-style wall decor made with natural cotton rope.",
             price: 55.00,
-            artisanId: homeDecorArtisan.id,
+            artisanId: jewelryArtisan.id,
             images: {
               create: [
                 { url: "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?auto=format&fit=crop&w=800&q=80" }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  });
+
+  // 6. Glass Category
+  await prisma.category.create({
+    data: {
+      name: "Glass",
+      products: {
+        create: [
+          {
+            name: "Handblown Glass Vase",
+            description: "A handblown glass vase with a soft transparent finish for modern interiors.",
+            price: 48.00,
+            artisanId: woodworkArtisan.id,
+            images: {
+              create: [
+                { url: "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=800&q=80" }
+              ]
+            }
+          },
+          {
+            name: "Fused Glass Coasters",
+            description: "Set of colorful fused glass coasters, handmade in small batches.",
+            price: 32.00,
+            artisanId: woodworkArtisan.id,
+            images: {
+              create: [
+                { url: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80" }
               ]
             }
           }
