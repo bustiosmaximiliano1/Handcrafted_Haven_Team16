@@ -1,4 +1,4 @@
-import { registerAction } from "../actions";
+import { registerAction } from "@/actions/auth-actions";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";

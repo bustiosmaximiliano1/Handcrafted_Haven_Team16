@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
-import { logoutAction } from "@/app/auth/login/actions";
+import { logoutAction } from "@/actions/auth-actions";
 import { prisma } from "@/lib/prisma";
 import NavbarSearch from "./NavbarSearch";
 import styles from "./Navbar.module.css";

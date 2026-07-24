@@ -4,7 +4,7 @@ import ProductForm from "@/components/ProductForm/ProductForm";
 import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client"; // <-- Importamos Role
 import { notFound } from "next/navigation";
-import { updateProduct } from "../../actions";
+import { updateProduct } from "@/actions/product-actions";
 import styles from "./page.module.css";
 
 interface EditProductPageProps {

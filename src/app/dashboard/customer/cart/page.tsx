@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
-import { checkoutCartAction } from "./actions";
+import { checkoutCartAction } from "@/actions/checkout-actions";
 import styles from "./page.module.css";
 
 export default async function CustomerCartPage() {

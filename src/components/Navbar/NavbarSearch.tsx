@@ -17,11 +17,6 @@ export default function NavbarSearch() {
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen) return;
-    setTerm(searchParams.get("q") ?? "");
-  }, [searchParams, isOpen]);
-
-  useEffect(() => {
     if (!isOpen) return;
     if (!window.matchMedia("(max-width: 520px)").matches) return;
 
@@ -72,7 +67,12 @@ export default function NavbarSearch() {
         aria-label={isOpen ? "Close product search" : "Open product search"}
         aria-expanded={isOpen}
         aria-controls="navbar-search-form"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          if (!isOpen) {
+            setTerm(searchParams.get("q") ?? "");
+          }
+          setIsOpen((prev) => !prev);
+        }}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.searchIcon}>
           <path

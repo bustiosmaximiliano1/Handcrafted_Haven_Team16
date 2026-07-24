@@ -1,39 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import { normalizeProfileImageUrl } from "@/lib/profile-image-url";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import { updateArtisanProfileAction } from "@/actions/profile-actions";
 import styles from "./ProfilePage.module.css";
-
-// Server Action to update the profile
-async function updateProfile(formData: FormData) {
-  "use server";
-
-  const userId = formData.get("userId") as string;
-  const name = formData.get("name") as string;
-  const bio = formData.get("bio") as string;
-  const profileImageUrlInput = formData.get("profileImageUrl") as string | null;
-
-  if (!userId) return;
-
-  const normalizedProfileImageUrl = normalizeProfileImageUrl(profileImageUrlInput);
-
-  if (profileImageUrlInput?.trim() && !normalizedProfileImageUrl) {
-    throw new Error("Please provide a valid profile image URL.");
-  }
-
-  await prisma.user.update({
-    where: { id: userId },
-    data: {
-      name,
-      bio,
-      profileImageUrl: normalizedProfileImageUrl,
-    },
-  });
-
-  redirect("/success?message=Your%20changes%20have%20been%20saved%20successfully.&redirect=/dashboard/artisan/products&buttonText=Return%20to%20Dashboard");
-}
 
 export default async function ArtisanProfileEditPage() {
   const cookieStore = await cookies();
@@ -62,9 +33,7 @@ export default async function ArtisanProfileEditPage() {
             Update your public name and share your story with customers visiting your profile.
           </p>
 
-          <form action={updateProfile} className={styles.form}>
-            <input type="hidden" name="userId" value={artisan.id} />
-
+          <form action={updateArtisanProfileAction} className={styles.form}>
             <div className={styles.field}>
               <label className={styles.label} htmlFor="name">
                 Artisan Name
