@@ -28,24 +28,57 @@ interface Product {
 interface ProductsPageProps {
   searchParams: Promise<{
     category?: string;
+    q?: string;
   }>;
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const params = await searchParams;
   const activeCategory = params.category?.trim().toLowerCase();
+  const query = params.q?.trim();
 
-  const products = await prisma.product.findMany({
-    where: activeCategory
-      ? {
+  const filters = [];
+
+  if (activeCategory) {
+    filters.push({
+      category: {
+        name: {
+          equals: activeCategory,
+          mode: "insensitive" as const,
+        },
+      },
+    });
+  }
+
+  if (query) {
+    filters.push({
+      OR: [
+        {
+          name: {
+            contains: query,
+            mode: "insensitive" as const,
+          },
+        },
+        {
+          description: {
+            contains: query,
+            mode: "insensitive" as const,
+          },
+        },
+        {
           category: {
             name: {
-              equals: activeCategory,
-              mode: "insensitive",
+              contains: query,
+              mode: "insensitive" as const,
             },
           },
-        }
-      : undefined,
+        },
+      ],
+    });
+  }
+
+  const products = await prisma.product.findMany({
+    where: filters.length > 0 ? { AND: filters } : undefined,
     include: {
       images: true,
       category: true,
@@ -60,15 +93,19 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       <main className={`products-page ${styles.main}`}>
         <h1 className="page-title">Our Handcrafted Products</h1>
         <p className="section-subtitle">
-          {activeCategory
-            ? `Showing ${activeCategory} pieces from independent makers.`
-            : "Discover handmade pieces created by independent makers and small-batch artisans."}
+          {activeCategory && query
+            ? `Showing results for "${query}" in ${activeCategory}.`
+            : activeCategory
+              ? `Showing ${activeCategory} pieces from independent makers.`
+              : query
+                ? `Showing results for "${query}".`
+                : "Discover handmade pieces created by independent makers and small-batch artisans."}
         </p>
 
-        {activeCategory && (
+        {(activeCategory || query) && (
           <div className={styles.clearFilterWrap}>
             <Link href="/products" className={`button button--secondary ${styles.clearFilterButton}`}>
-              Clear filter
+              Clear filters
             </Link>
           </div>
         )}
@@ -103,7 +140,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
         {products.length === 0 && (
           <p className={`section-subtitle ${styles.emptyState}`}>
-            No products found for this category yet.
+            No products found with the current filters.
           </p>
         )}
       </main>

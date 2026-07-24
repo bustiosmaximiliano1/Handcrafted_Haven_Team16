@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { logoutAction } from "@/app/auth/login/actions";
 import { prisma } from "@/lib/prisma";
+import NavbarSearch from "./NavbarSearch";
 import styles from "./Navbar.module.css";
 
 export default async function Navbar() {
@@ -52,6 +53,8 @@ export default async function Navbar() {
         </nav>
 
         <div className={styles.actions}>
+          <NavbarSearch />
+
           {isAuthenticated ? (
             <form action={logoutAction}>
               <button type="submit" className={styles.authLinkButton}>
