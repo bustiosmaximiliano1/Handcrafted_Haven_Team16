@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { loginAction, type LoginActionState } from "./actions";
+import { loginAction, type LoginActionState } from "@/actions/auth-actions";
 import styles from "@/app/auth/auth-form.module.css";
 
 const initialState: LoginActionState = {

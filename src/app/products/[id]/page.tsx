@@ -1,65 +1,14 @@
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
-import { cookies } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { addToCartAction } from "@/actions/cart-actions";
 import styles from "./ProductDetail.module.css";
 
 interface ProductDetailPageProps {
   params: Promise<{ id: string }>;
-}
-
-async function addToCart(formData: FormData) {
-  "use server";
-
-  const productId = formData.get("productId") as string;
-  const cookieStore = await cookies();
-  const userId = cookieStore.get("userId")?.value;
-
-  if (!userId) {
-    redirect("/auth/login");
-  }
-
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-  });
-
-  if (!user || user.role !== "CUSTOMER") {
-    redirect("/products");
-  }
-
-  let cart = await prisma.cart.findUnique({
-    where: { userId },
-  });
-
-  if (!cart) {
-    cart = await prisma.cart.create({
-      data: { userId },
-    });
-  }
-
-  await prisma.cartItem.upsert({
-    where: {
-      cartId_productId: {
-        cartId: cart.id,
-        productId,
-      },
-    },
-    update: {
-      quantity: {
-        increment: 1,
-      },
-    },
-    create: {
-      cartId: cart.id,
-      productId,
-      quantity: 1,
-    },
-  });
-
-  redirect("/dashboard/customer/cart");
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
@@ -131,7 +80,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </p>
 
             <div className={styles.actions}>
-              <form action={addToCart}>
+              <form action={addToCartAction}>
                 <input type="hidden" name="productId" value={product.id} />
                 <button type="submit" className="button button--primary button--subtle-lift">
                   Add to cart

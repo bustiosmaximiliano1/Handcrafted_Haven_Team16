@@ -44,6 +44,8 @@ export default function ProductForm({
       )}
 
       <form action={action} className={styles.form}>
+        {initialData?.id && <input type="hidden" name="productId" value={initialData.id} />}
+
         <div className={styles.group}>
           <label className={styles.label}>Product Name</label>
           <input

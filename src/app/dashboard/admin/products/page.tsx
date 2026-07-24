@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { deleteProduct } from "./actions";
+import { deleteProduct } from "@/actions/product-actions";
 import styles from "./page.module.css";
 
 export default async function AdminProductsPage() {
