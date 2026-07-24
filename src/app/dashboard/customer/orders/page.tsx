@@ -17,7 +17,7 @@ export default async function CustomerOrdersPage() {
     where: { id: userId },
   });
 
-  if (!user || user.role !== "CUSTOMER") {
+  if (!user || user.role === "ADMIN") {
     redirect("/products");
   }
 

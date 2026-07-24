@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { addToCartAction } from "@/actions/cart-actions";
+import AddToCartSubmitButton from "@/components/AddToCartButton/AddToCartSubmitButton";
 import styles from "./ProductDetail.module.css";
 
 interface ProductDetailPageProps {
@@ -80,12 +81,19 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </p>
 
             <div className={styles.actions}>
-              <form action={addToCartAction}>
-                <input type="hidden" name="productId" value={product.id} />
-                <button type="submit" className="button button--primary button--subtle-lift">
-                  Add to cart
-                </button>
-              </form>
+              {product.stock > 0 ? (
+                <form action={addToCartAction}>
+                  <input type="hidden" name="productId" value={product.id} />
+                  <input type="hidden" name="redirectTo" value={`/products/${product.id}`} />
+                  <AddToCartSubmitButton
+                    className="button button--primary button--subtle-lift"
+                    idleText="Add to cart"
+                    pendingText="Adding..."
+                  />
+                </form>
+              ) : (
+                <p className={styles.soldOut}>Sold out</p>
+              )}
 
               <Link href="/products" className={styles.backLink}>
                 Back to catalog

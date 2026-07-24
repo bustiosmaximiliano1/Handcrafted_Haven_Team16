@@ -27,6 +27,7 @@
 }
 
 .checkoutButton {
+  display: inline-block;
   margin-top: 0.5rem;
   padding: 0.75rem 1.25rem;
   border-radius: 999px;
@@ -34,4 +35,5 @@
   color: white;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }

@@ -9,10 +9,27 @@ import styles from "./Navbar.module.css";
 export default async function Navbar() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
-  const user = userId ? await prisma.user.findUnique({ where: { id: userId } }) : null;
+  const user = userId
+    ? await prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+          cart: {
+            include: {
+              items: {
+                select: {
+                  quantity: true,
+                },
+              },
+            },
+          },
+        },
+      })
+    : null;
   const isAuthenticated = Boolean(user);
   const isArtisan = user?.role === "ARTISAN";
   const isAdmin = user?.role === "ADMIN";
+  const canShop = isAuthenticated && !isAdmin;
+  const cartItemCount = user?.cart?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
 
   return (
     <header className={styles.header}>
@@ -37,6 +54,8 @@ export default async function Navbar() {
             <>
               <Link href="/dashboard/artisan/products">My Products</Link>
               <Link href="/dashboard/artisan/products/profile">Profile</Link>
+              <Link href="/dashboard/customer/orders">Orders</Link>
+              <Link href="/dashboard/customer/cart">Cart</Link>
             </>
           )}
 
@@ -53,6 +72,18 @@ export default async function Navbar() {
         </nav>
 
         <div className={styles.actions}>
+          {canShop && (
+            <Link href="/cart" className={styles.cartButton} aria-label={`Cart with ${cartItemCount} items`}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.cartIcon}>
+                <path
+                  d="M7 4a1 1 0 0 0 0 2h1l1.2 6.1a2 2 0 0 0 2 1.6h6.5a2 2 0 0 0 2-1.5L21 8H10.3l-.3-2A2 2 0 0 0 8 4H7Zm5 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"
+                  fill="currentColor"
+                />
+              </svg>
+              {cartItemCount > 0 && <span className={styles.cartBadge}>{cartItemCount}</span>}
+            </Link>
+          )}
+
           <NavbarSearch />
 
           {isAuthenticated ? (
