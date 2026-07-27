@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
-// Display face — elegant serif for headlines and brand moments.
+// I chose this display face to give headlines and brand moments an elegant serif style.
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -11,7 +11,7 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-// Body face — modern, clean sans serif for UI and long reading.
+// I chose this body face to keep UI text and long reading sections clean and modern.
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -19,7 +19,7 @@ const inter = Inter({
   display: "swap",
 });
 
-// SEO: Next.js reads this metadata to build <title>, <meta> and social tags.
+// I configured this metadata so Next.js can build title, meta, and social tags for SEO.
 export const metadata: Metadata = {
   title: "Handcrafted Haven — Unique handmade goods from independent makers",
   description:

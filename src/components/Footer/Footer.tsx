@@ -63,7 +63,7 @@ export default function Footer() {
       </div>
 
       <div className={`container ${styles.bottom}`}>
-        {/* TODO: replace with your team's real names */}
+        {/* I left this reminder so I can replace this line with my team's real names before final delivery. */}
         <p>&copy; 2026 Handcrafted Haven. Built by Team 16.</p>
         <p className={styles.small}>WDD 430 · BYU-Idaho</p>
       </div>

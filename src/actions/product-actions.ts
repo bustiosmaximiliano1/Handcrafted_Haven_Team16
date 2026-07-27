@@ -1,10 +1,143 @@
 "use server";
 
+import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { normalizeProductImageUrl } from "@/lib/product-image-url";
+
+interface ProductCatalogFilters {
+  categoryId?: string;
+  categoryName?: string;
+  query?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  inStockOnly?: string;
+  sort?: string;
+}
+
+// I keep this helper centralized so I can reuse the same filter logic for every catalog entry point.
+function buildCatalogWhereClause({
+  categoryId,
+  categoryName,
+  query,
+  minPrice,
+  maxPrice,
+  inStockOnly,
+}: ProductCatalogFilters): Prisma.ProductWhereInput | undefined {
+  const activeCategoryId = categoryId?.trim();
+  const activeCategoryName = categoryName?.trim();
+  const activeQuery = query?.trim();
+  const parsedMinPrice = Number(minPrice);
+  const parsedMaxPrice = Number(maxPrice);
+  const hasMinPrice = Number.isFinite(parsedMinPrice) && parsedMinPrice >= 0;
+  const hasMaxPrice = Number.isFinite(parsedMaxPrice) && parsedMaxPrice >= 0;
+  const filters: Prisma.ProductWhereInput[] = [];
+
+  if (activeCategoryId) {
+    filters.push({
+      categoryId: activeCategoryId,
+    });
+  } else if (activeCategoryName) {
+    // I keep this fallback so old links that still pass a category name continue to work.
+    filters.push({
+      category: {
+        name: {
+          equals: activeCategoryName,
+          mode: "insensitive",
+        },
+      },
+    });
+  }
+
+  if (activeQuery) {
+    filters.push({
+      OR: [
+        {
+          name: {
+            contains: activeQuery,
+            mode: "insensitive",
+          },
+        },
+        {
+          description: {
+            contains: activeQuery,
+            mode: "insensitive",
+          },
+        },
+        {
+          category: {
+            name: {
+              contains: activeQuery,
+              mode: "insensitive",
+            },
+          },
+        },
+      ],
+    });
+  }
+
+  if (hasMinPrice || hasMaxPrice) {
+    filters.push({
+      price: {
+        ...(hasMinPrice ? { gte: parsedMinPrice } : {}),
+        ...(hasMaxPrice ? { lte: parsedMaxPrice } : {}),
+      },
+    });
+  }
+
+  if (inStockOnly === "1") {
+    filters.push({
+      stock: {
+        gt: 0,
+      },
+    });
+  }
+
+  return filters.length > 0 ? { AND: filters } : undefined;
+}
+
+function buildCatalogOrderBy(sort?: string): Prisma.ProductOrderByWithRelationInput {
+  if (sort === "price_asc") {
+    return { price: "asc" };
+  }
+
+  if (sort === "price_desc") {
+    return { price: "desc" };
+  }
+
+  if (sort === "name_asc") {
+    return { name: "asc" };
+  }
+
+  return { createdAt: "desc" };
+}
+
+export async function getProductCategories() {
+  // I fetch categories sorted by name so the filter list feels predictable for users.
+  return prisma.category.findMany({
+    select: {
+      id: true,
+      name: true,
+    },
+    orderBy: {
+      name: "asc",
+    },
+  });
+}
+
+export async function getFilteredProducts(filters: ProductCatalogFilters) {
+  // I run this Prisma query on the server so URL filters always map to a single source of truth.
+  return prisma.product.findMany({
+    where: buildCatalogWhereClause(filters),
+    include: {
+      images: true,
+      category: true,
+    },
+    orderBy: buildCatalogOrderBy(filters.sort),
+  });
+}
 
 export async function createOwnProductAction(formData: FormData) {
   const cookieStore = await cookies();
