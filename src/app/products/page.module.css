@@ -2,6 +2,18 @@
   padding: 2rem;
 }
 
+.catalogLayout {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.catalogResults {
+  min-width: 0;
+}
+
 .clearFilterWrap {
   margin-top: 0.75rem;
 }
@@ -12,4 +24,14 @@
 
 .emptyState {
   margin-top: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .catalogLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogResults {
+    padding-bottom: 4.75rem;
+  }
 }

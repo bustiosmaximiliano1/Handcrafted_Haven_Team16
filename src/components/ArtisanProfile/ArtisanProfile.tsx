@@ -1,5 +1,5 @@
 import Link from "next/link";
-// Importamos el CSS module desde la misma carpeta del componente
+// I imported this CSS module from the same folder so I can keep styles scoped to this component.
 import styles from "./ArtisanProfile.module.css";
 
 interface Product {

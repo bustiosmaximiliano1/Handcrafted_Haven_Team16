@@ -1,0 +1,184 @@
+.sidebar {
+  position: sticky;
+  top: 6.75rem;
+  align-self: start;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1rem;
+}
+
+.sidebarTitle {
+  margin: 0 0 0.85rem;
+  font-size: 1rem;
+}
+
+.categoryList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.categoryButton {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.categoryButton:hover {
+  border-color: var(--ink-soft);
+  transform: translateY(-1px);
+}
+
+.categoryButtonActive {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.advancedFilters {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.groupTitle {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.priceInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.inputLabel {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.input,
+.select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 2.4rem;
+  padding: 0.45rem 0.65rem;
+}
+
+.checkLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.actions button {
+  min-height: 2.35rem;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.9rem;
+}
+
+.mobileFloatingButton {
+  display: none;
+}
+
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+}
+
+.mobileBackdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(17, 17, 17, 0.45);
+}
+
+.mobilePanel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(480px, 100%);
+  max-height: 80vh;
+  overflow: auto;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 1rem 1rem 1.25rem;
+}
+
+.mobilePanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.mobilePanelTitle {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.mobileCloseButton {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .priceInputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .sidebar {
+    display: none;
+  }
+
+  .mobileFloatingButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 40;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    min-height: 2.8rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.92rem;
+    box-shadow: 0 16px 30px -20px rgba(17, 17, 17, 0.7);
+    cursor: pointer;
+  }
+}

@@ -1,11 +1,11 @@
--- AlterEnum
+-- I alter this enum in this migration step.
 ALTER TYPE "Role" ADD VALUE 'ARTISAN';
 
--- AlterTable
+-- I alter this table in this migration step.
 ALTER TABLE "Product" ADD COLUMN     "artisanId" TEXT;
 
--- CreateIndex
+-- I create this index in this migration step.
 CREATE INDEX "Product_artisanId_idx" ON "Product"("artisanId");
 
--- AddForeignKey
+-- I add this foreign key in this migration step.
 ALTER TABLE "Product" ADD CONSTRAINT "Product_artisanId_fkey" FOREIGN KEY ("artisanId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
