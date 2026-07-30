@@ -18,6 +18,7 @@ const columns = [
       { label: "Products", href: "/products" },
       { label: "Artisans", href: "/artisans" },
       { label: "Become a seller", href: "/auth/register/artisan" },
+      {label: "About Us", href: "/about-us"},
     ],
   },
   {
