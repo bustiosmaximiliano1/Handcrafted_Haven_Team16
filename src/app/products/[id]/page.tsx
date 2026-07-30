@@ -8,6 +8,7 @@ import { addToCartAction } from "@/actions/cart-actions";
 import AddToCartSubmitButton from "@/components/AddToCartButton/AddToCartSubmitButton";
 import { createReviewAction } from "@/actions/review-actions";
 import { cookies } from "next/headers";
+import StarRating from "@/components/StarRating/StarRating";
 import styles from "./ProductDetail.module.css";
 
 interface ProductDetailPageProps {
@@ -62,6 +63,10 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     : null;
 
   const canLeaveReview = Boolean(currentUser);
+  const reviewAverage =
+    product.reviews.length > 0
+      ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length
+      : 0;
 
   return (
     <>
@@ -134,8 +139,18 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
         <section className={`${styles.reviewsCard} surface-card`}>
           <div className={styles.reviewsHeader}>
-            <h2 className={styles.reviewsTitle}>Reviews</h2>
-            <p className={styles.reviewsSubtitle}>{product.reviews.length} review{product.reviews.length === 1 ? "" : "s"}</p>
+            <div>
+              <h2 className={styles.reviewsTitle}>Reviews</h2>
+              <p className={styles.reviewsSubtitle}>
+                {product.reviews.length} review{product.reviews.length === 1 ? "" : "s"}
+              </p>
+            </div>
+
+            {product.reviews.length > 0 ? (
+              <StarRating value={reviewAverage} />
+            ) : (
+              <p className={styles.reviewsSubtitle}>No average yet</p>
+            )}
           </div>
 
           {product.reviews.length === 0 ? (

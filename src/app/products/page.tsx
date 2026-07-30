@@ -6,6 +6,7 @@ import Image from "next/image";
 import { addToCartAction } from "@/actions/cart-actions";
 import AddToCartSubmitButton from "@/components/AddToCartButton/AddToCartSubmitButton";
 import ProductFilter from "@/components/ProductFilter/ProductFilter";
+import StarRating from "@/components/StarRating/StarRating";
 import styles from "./page.module.css";
 
 // I keep explicit interfaces here so strict TypeScript checks stay readable in this page.
@@ -27,6 +28,7 @@ interface Product {
   description?: string | null;
   images: ProductImage[];
   category?: ProductCategory | null;
+  reviews: { rating: number }[];
 }
 
 interface ProductsPageProps {
@@ -124,6 +126,15 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                     )}
                     <h2 className="product-card__title">{product.name}</h2>
                   </Link>
+
+                  {product.reviews.length > 0 ? (
+                    <StarRating
+                      value={product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length}
+                      showValue
+                    />
+                  ) : (
+                    <p className="product-card__ratingEmpty">No reviews yet</p>
+                  )}
 
                   <p className="product-card__price">${product.price.toString()}</p>
 
