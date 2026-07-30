@@ -31,6 +31,7 @@ model User {
   cart      Cart?
   orders    Order[]
   products  Product[]
+  reviews   Review[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
@@ -58,12 +59,33 @@ model Product {
 
   orderItems  OrderItem[]
   cartItems   CartItem[]
+  reviews     Review[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @default(now()) @updatedAt
 
   @@index([categoryId])
   @@index([artisanId])
   @@index([name])
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  rating    Int
+  title     String?
+  body      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([productId, userId])
+  @@index([productId])
+  @@index([userId])
 }
 
 model Image {
