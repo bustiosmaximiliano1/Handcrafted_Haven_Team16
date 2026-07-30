@@ -134,6 +134,11 @@ export async function getFilteredProducts(filters: ProductCatalogFilters) {
     include: {
       images: true,
       category: true,
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
     },
     orderBy: buildCatalogOrderBy(filters.sort),
   });

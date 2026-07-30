@@ -6,6 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { addToCartAction } from "@/actions/cart-actions";
 import AddToCartSubmitButton from "@/components/AddToCartButton/AddToCartSubmitButton";
+import { createReviewAction } from "@/actions/review-actions";
+import { cookies } from "next/headers";
+import StarRating from "@/components/StarRating/StarRating";
 import styles from "./ProductDetail.module.css";
 
 interface ProductDetailPageProps {
@@ -14,6 +17,8 @@ interface ProductDetailPageProps {
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { id } = await params;
+  const cookieStore = await cookies();
+  const userId = cookieStore.get("userId")?.value;
 
   const product = await prisma.product.findUnique({
     where: { id },
@@ -26,12 +31,42 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           name: true,
         },
       },
+      reviews: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              profileImageUrl: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
     },
   });
 
   if (!product) {
     notFound();
   }
+
+  const currentUser = userId
+    ? await prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          role: true,
+        },
+      })
+    : null;
+
+  const canLeaveReview = Boolean(currentUser);
+  const reviewAverage =
+    product.reviews.length > 0
+      ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length
+      : 0;
 
   return (
     <>
@@ -100,6 +135,105 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               </Link>
             </div>
           </article>
+        </section>
+
+        <section className={`${styles.reviewsCard} surface-card`}>
+          <div className={styles.reviewsHeader}>
+            <div>
+              <h2 className={styles.reviewsTitle}>Reviews</h2>
+              <p className={styles.reviewsSubtitle}>
+                {product.reviews.length} review{product.reviews.length === 1 ? "" : "s"}
+              </p>
+            </div>
+
+            {product.reviews.length > 0 ? (
+              <StarRating value={reviewAverage} />
+            ) : (
+              <p className={styles.reviewsSubtitle}>No average yet</p>
+            )}
+          </div>
+
+          {product.reviews.length === 0 ? (
+            <p className={styles.emptyReviews}>No one has reviewed this product yet.</p>
+          ) : (
+            <div className={styles.reviewList}>
+              {product.reviews.map((review) => (
+                <article key={review.id} className={styles.reviewItem}>
+                  <div className={styles.reviewTopRow}>
+                    <div>
+                      <strong className={styles.reviewerName}>{review.user.name || "Anonymous"}</strong>
+                      <p className={styles.reviewMeta}>Rating: {review.rating}/5</p>
+                    </div>
+                    <time className={styles.reviewDate} dateTime={review.createdAt.toISOString()}>
+                      {review.createdAt.toLocaleDateString()}
+                    </time>
+                  </div>
+
+                  {review.title && <h3 className={styles.reviewTitle}>{review.title}</h3>}
+                  <p className={styles.reviewBody}>{review.body}</p>
+                </article>
+              ))}
+            </div>
+          )}
+
+          <div className={styles.reviewFormWrap}>
+            <h3 className={styles.reviewFormTitle}>Write a review</h3>
+
+            {currentUser ? (
+              canLeaveReview ? (
+                <form action={createReviewAction} className={styles.reviewForm}>
+                  <input type="hidden" name="productId" value={product.id} />
+
+                  <label className={styles.field}>
+                    <span className={styles.fieldLabel}>Rating</span>
+                    <select name="rating" defaultValue="5" className={styles.select} required>
+                      <option value="5">5 - Excellent</option>
+                      <option value="4">4 - Great</option>
+                      <option value="3">3 - Good</option>
+                      <option value="2">2 - Fair</option>
+                      <option value="1">1 - Poor</option>
+                    </select>
+                  </label>
+
+                  <label className={styles.field}>
+                    <span className={styles.fieldLabel}>Title</span>
+                    <input
+                      type="text"
+                      name="title"
+                      className={styles.input}
+                      placeholder="Optional short summary"
+                      maxLength={120}
+                    />
+                  </label>
+
+                  <label className={styles.field}>
+                    <span className={styles.fieldLabel}>Review</span>
+                    <textarea
+                      name="body"
+                      className={styles.textarea}
+                      placeholder="Share what you thought about the product"
+                      rows={5}
+                      maxLength={2000}
+                      required
+                    />
+                  </label>
+
+                  <button type="submit" className="button button--primary button--subtle-lift">
+                    Submit review
+                  </button>
+                </form>
+              ) : (
+                <p className={styles.reviewGate}>Only logged-in users can review this product.</p>
+              )
+            ) : (
+              <p className={styles.reviewGate}>
+                <Link href="/auth/login" className={styles.reviewLink}>
+                  Log in
+                </Link>{" "}
+                to write a review.
+              </p>
+            )}
+          </div>
         </section>
       </main>
 

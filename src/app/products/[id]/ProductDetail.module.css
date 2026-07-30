@@ -113,12 +113,151 @@
   color: var(--ink-soft);
 }
 
+.reviewsCard {
+  max-width: 1040px;
+  margin: 1.5rem auto 0;
+  padding: 1.25rem;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.reviewsHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.reviewsTitle {
+  font-size: 1.35rem;
+  margin: 0;
+}
+
+.reviewsSubtitle {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.reviewsSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.emptyReviews,
+.reviewGate {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.reviewList {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.reviewItem {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.reviewTopRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.reviewerName {
+  display: block;
+}
+
+.reviewMeta,
+.reviewDate {
+  color: var(--ink-soft);
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+}
+
+.reviewTitle {
+  margin: 0 0 0.4rem;
+  font-size: 1.02rem;
+}
+
+.reviewBody {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.reviewFormWrap {
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}
+
+.reviewFormTitle {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.reviewForm {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 620px;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.fieldLabel {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.8rem 0.95rem;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.reviewLink {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
     max-width: 760px;
   }
 
+  .reviewsHeader,
+  .reviewTopRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
   .imageWrap,
   .imagePlaceholder {
     height: clamp(230px, 55vw, 420px);

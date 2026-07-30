@@ -1,0 +1,27 @@
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.12rem;
+}
+
+.star {
+  --fill: 0%;
+  font-size: 1rem;
+  line-height: 1;
+  background: linear-gradient(90deg, #d4a64a 0 var(--fill), #ddd6c9 var(--fill) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.value {
+  font-weight: 600;
+  color: var(--ink);
+}

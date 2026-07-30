@@ -249,6 +249,11 @@ button:focus-visible {
   font-weight: 700;
 }
 
+.product-card__ratingEmpty {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
 .product-card__actionForm {
   margin-top: auto;
 }
