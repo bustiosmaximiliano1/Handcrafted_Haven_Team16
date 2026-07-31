@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { updateArtisanProfileAction } from "@/actions/profile-actions";
+import AccountDeleteSection from "@/components/AccountDeleteSection/AccountDeleteSection";
 import styles from "./ProfilePage.module.css";
 
 export default async function ArtisanProfileEditPage() {
@@ -80,6 +81,8 @@ export default async function ArtisanProfileEditPage() {
               Save Changes
             </button>
           </form>
+
+          <AccountDeleteSection />
         </section>
       </main>
       <Footer />

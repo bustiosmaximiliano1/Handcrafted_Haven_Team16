@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import AccountDeleteSection from "@/components/AccountDeleteSection/AccountDeleteSection";
 import { prisma } from "@/lib/prisma";
 import styles from "./page.module.css";
 
@@ -31,6 +32,8 @@ export default async function CustomerProfilePage() {
           <p><strong>Name:</strong> {user.name || "—"}</p>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Role:</strong> {user.role}</p>
+
+          <AccountDeleteSection />
         </div>
       </main>
 
