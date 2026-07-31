@@ -17,7 +17,6 @@ const columns = [
     links: [
       { label: "Products", href: "/products" },
       { label: "Artisans", href: "/artisans" },
-      { label: "Become a seller", href: "/auth/register/artisan" },
       {label: "About Us", href: "/about-us"},
     ],
   },
@@ -26,7 +25,7 @@ const columns = [
     links: [
       { label: "Sign in", href: "/auth/login" },
       { label: "Register as customer", href: "/auth/register/customer" },
-      { label: "Register as artisan", href: "/auth/register/artisan" },
+      { label: "Become a seller", href: "/auth/register/artisan" },
     ],
   },
 ];

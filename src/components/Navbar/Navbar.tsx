@@ -30,6 +30,11 @@ export default async function Navbar() {
   const isAdmin = user?.role === "ADMIN";
   const canShop = isAuthenticated && !isAdmin;
   const cartItemCount = user?.cart?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
+  const publicLinks = [
+    { href: "/products", label: "Products" },
+    { href: "/artisans", label: "Artisans" },
+    { href: "/about-us", label: "About Us" },
+  ];
 
   return (
     <header className={styles.header}>
@@ -46,17 +51,17 @@ export default async function Navbar() {
         </Link>
 
         <nav className={styles.nav} aria-label="Primary">
-          <Link href="/products">Products</Link>
-          <Link href="/artisans">Artisans</Link>
-          <Link href="/auth/register/artisan">Become a seller</Link>
-          <Link href="/about-us">About Us</Link>
+          {publicLinks.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
 
           {isArtisan && (
             <>
               <Link href="/dashboard/artisan/products">My Products</Link>
               <Link href="/dashboard/artisan/products/profile">Profile</Link>
               <Link href="/dashboard/customer/orders">Orders</Link>
-              <Link href="/dashboard/customer/cart">Cart</Link>
             </>
           )}
 
@@ -66,7 +71,6 @@ export default async function Navbar() {
             <>
               <Link href="/dashboard/customer">Dashboard</Link>
               <Link href="/dashboard/customer/orders">Orders</Link>
-              <Link href="/dashboard/customer/cart">Cart</Link>
               <Link href="/dashboard/customer/profile">Profile</Link>
             </>
           )}
@@ -88,16 +92,64 @@ export default async function Navbar() {
           <NavbarSearch />
 
           {isAuthenticated ? (
-            <form action={logoutAction}>
+            <form action={logoutAction} className={styles.desktopOnly}>
               <button type="submit" className={styles.authLinkButton}>
                 Logout
               </button>
             </form>
           ) : (
-            <Link href="/auth/login" className={styles.authLink}>
+            <Link href="/auth/login" className={`${styles.authLink} ${styles.desktopOnly}`}>
               Login
             </Link>
           )}
+
+          <details className={styles.mobileMenu}>
+            <summary className={styles.hamburgerButton} aria-label="Toggle navigation menu">
+              <span className={styles.hamburgerLine} />
+              <span className={styles.hamburgerLine} />
+              <span className={styles.hamburgerLine} />
+            </summary>
+
+            <div className={styles.mobileMenuPanel}>
+              <nav className={styles.mobileNav} aria-label="Mobile primary">
+                {publicLinks.map((link) => (
+                  <Link key={`mobile-${link.href}`} href={link.href}>
+                    {link.label}
+                  </Link>
+                ))}
+
+                {isArtisan && (
+                  <>
+                    <Link href="/dashboard/artisan/products">My Products</Link>
+                    <Link href="/dashboard/artisan/products/profile">Profile</Link>
+                    <Link href="/dashboard/customer/orders">Orders</Link>
+                  </>
+                )}
+
+                {isAdmin && <Link href="/dashboard/admin/products">Admin Panel</Link>}
+
+                {!isArtisan && !isAdmin && isAuthenticated && (
+                  <>
+                    <Link href="/dashboard/customer">Dashboard</Link>
+                    <Link href="/dashboard/customer/orders">Orders</Link>
+                    <Link href="/dashboard/customer/profile">Profile</Link>
+                  </>
+                )}
+
+                {isAuthenticated ? (
+                  <form action={logoutAction} className={styles.mobileLogoutForm}>
+                    <button type="submit" className={styles.mobileLogoutButton}>
+                      Logout
+                    </button>
+                  </form>
+                ) : (
+                  <Link href="/auth/login" className={styles.mobileUtilityLink}>
+                    Login
+                  </Link>
+                )}
+              </nav>
+            </div>
+          </details>
         </div>
       </div>
     </header>
