@@ -49,6 +49,7 @@ export default async function Navbar() {
           <Link href="/products">Products</Link>
           <Link href="/artisans">Artisans</Link>
           <Link href="/auth/register/artisan">Become a seller</Link>
+          <Link href="/about-us">About Us</Link>
 
           {isArtisan && (
             <>
