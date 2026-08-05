@@ -17,6 +17,17 @@ interface ProductCatalogFilters {
   sort?: string;
 }
 
+function ensureValidProvidedProductImageUrl(
+  imageUrlInput: string | null,
+  normalizedImageUrl: string | null
+) {
+  if (imageUrlInput?.trim() && !normalizedImageUrl) {
+    throw new Error(
+      "Invalid product image URL. Please use a valid image extension or a supported image host."
+    );
+  }
+}
+
 // I keep this helper centralized so I can reuse the same filter logic for every catalog entry point.
 function buildCatalogWhereClause({
   categoryId,
@@ -169,6 +180,8 @@ export async function createOwnProductAction(formData: FormData) {
   const imageUrl = formData.get("imageUrl") as string | null;
   const normalizedImageUrl = normalizeProductImageUrl(imageUrl);
 
+  ensureValidProvidedProductImageUrl(imageUrl, normalizedImageUrl);
+
   await prisma.product.create({
     data: {
       name,
@@ -248,6 +261,8 @@ export async function updateOwnProductAction(formData: FormData) {
   const imageUrl = formData.get("imageUrl") as string | null;
   const normalizedImageUrl = normalizeProductImageUrl(imageUrl);
 
+  ensureValidProvidedProductImageUrl(imageUrl, normalizedImageUrl);
+
   await prisma.product.update({
     where: { id: ownedProduct.id },
     data: {
@@ -288,6 +303,8 @@ export async function updateProduct(id: string, formData: FormData) {
   const artisanId = formData.get("artisanId") as string;
   const imageUrl = formData.get("imageUrl") as string | null;
   const normalizedImageUrl = normalizeProductImageUrl(imageUrl);
+
+  ensureValidProvidedProductImageUrl(imageUrl, normalizedImageUrl);
 
   await prisma.product.update({
     where: { id },

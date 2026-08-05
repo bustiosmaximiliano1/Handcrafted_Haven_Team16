@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { normalizeProductImageUrl } from "@/lib/product-image-url";
 import styles from "./ProductForm.module.css";
 
 interface OptionItem {
@@ -34,6 +38,27 @@ export default function ProductForm({
   buttonText = "Save Changes",
 }: ProductFormProps) {
   const activeArtisanId = initialData?.artisanId || defaultArtisanId || "";
+  const initialImageUrl = initialData?.images?.[0]?.url || "";
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
+  const [imageUrlError, setImageUrlError] = useState<string | null>(null);
+
+  const validateImageUrl = (value: string) => {
+    const normalizedValue = value.trim();
+
+    if (!normalizedValue) {
+      setImageUrlError(null);
+      return true;
+    }
+
+    const isValid = Boolean(normalizeProductImageUrl(normalizedValue));
+    setImageUrlError(
+      isValid
+        ? null
+        : "Invalid image URL. Use a valid image extension (.jpg, .jpeg, .png, .webp, .gif, .svg) or a supported image platform URL."
+    );
+
+    return isValid;
+  };
 
   return (
     <div className={styles.card}>
@@ -131,19 +156,33 @@ export default function ProductForm({
           <input
             type="url"
             name="imageUrl"
-            defaultValue={initialData?.images?.[0]?.url || ""}
+            value={imageUrl}
             placeholder="https://plus.unsplash.com/premium_photo-1714943792698-04676952002e?auto=format&fit=crop&w=800&q=80"
             className={styles.input}
+            onChange={(event) => {
+              const nextValue = event.currentTarget.value;
+              setImageUrl(nextValue);
+
+              if (imageUrlError) {
+                validateImageUrl(nextValue);
+              }
+            }}
+            onBlur={(event) => {
+              validateImageUrl(event.currentTarget.value);
+            }}
+            aria-invalid={imageUrlError ? true : undefined}
+            aria-describedby={imageUrlError ? "productImageUrlError" : undefined}
           />
           <p className={styles.helperText}>
             Example:{" "}
             https://plus.unsplash.com/premium_photo-1714943792698-04676952002e?auto=format&fit=crop&w=800&q=80
           </p>
           <p className={styles.helperText}>
-            Hey seller, from Team 16 we want to share with you some great places where you can find lovely images for your product.
+            Enter a public image URL (http/https). URLs are accepted if they end with .jpg, .jpeg, .png, .webp,
+            .gif, or .svg.
           </p>
           <p className={styles.helperText}>
-            You can explore:
+            You can also use URLs from supported hosts such as:
             <a href="https://unsplash.com" target="_blank" rel="noreferrer" className={styles.helperLink}>
               Unsplash
             </a>,
@@ -155,9 +194,19 @@ export default function ProductForm({
               Pixabay
             </a>.
           </p>
+
+          {imageUrlError && (
+            <p id="productImageUrlError" className={styles.fieldError} role="alert" aria-live="polite">
+              {imageUrlError}
+            </p>
+          )}
         </div>
 
-        <button type="submit" className={`${styles.submitBtn} button button--primary`}>
+        <button
+          type="submit"
+          className={`${styles.submitBtn} button button--primary`}
+          disabled={Boolean(imageUrlError)}
+        >
           {buttonText}
         </button>
       </form>
