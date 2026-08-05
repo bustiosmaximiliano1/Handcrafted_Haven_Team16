@@ -1,7 +1,7 @@
-import { registerAction } from "@/actions/auth-actions";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import styles from "@/app/auth/auth-form.module.css";
+import RegisterArtisanForm from "./artisan/RegisterArtisanForm";
 
 export default function RegisterPage() {
   return (
@@ -16,33 +16,7 @@ export default function RegisterPage() {
             Create an artisan account to manage your products, update your profile, and sell your handcrafted pieces.
           </p>
 
-          <form action={registerAction} className={styles.authForm}>
-            <input type="hidden" name="role" value="ARTISAN" />
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" required className={styles.input} />
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" required className={styles.input} />
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="password">Password</label>
-              <input type="password" id="password" name="password" required className={styles.input} />
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="profileImageUrl">Profile Photo URL (optional)</label>
-              <input type="url" id="profileImageUrl" name="profileImageUrl" placeholder="https://..." className={styles.input} />
-            </div>
-
-            <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
-              Create Seller Account
-            </button>
-          </form>
+          <RegisterArtisanForm />
         </section>
       </main>
 
