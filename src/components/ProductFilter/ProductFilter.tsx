@@ -218,6 +218,7 @@ if (nextMinPrice && nextMaxPrice) {
         </select>
       </label>
 
+
 {validationError && (
   <p
     className={styles.validationError}
@@ -227,6 +228,7 @@ if (nextMinPrice && nextMaxPrice) {
     {validationError}
   </p>
 )}
+
       <div className={styles.actions}>
         <button type="submit" className="button button--primary">
           Apply
