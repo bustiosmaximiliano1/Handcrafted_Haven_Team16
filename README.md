@@ -10,7 +10,9 @@ Our goal is to support local creators, promote sustainable consumption, and prov
 - Maximiliano Rolando Bustios Sosa   
 - Analina Nielsen  
 - Emil Roland Roding  
-- Victor Manuel Vega  
+- Victor Manuel Vega
+- Iyanu Adeleye
+- Kehinde Olusegun Odumosu
 
 ---
 
