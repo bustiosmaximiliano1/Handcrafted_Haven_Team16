@@ -28,7 +28,8 @@
   position: relative;
   z-index: 2;
   color: var(--white);
-  max-width: 46rem;
+  width: min(100%, 46rem);
+  margin-inline: auto;
   padding-block: clamp(3rem, 8vw, 5.5rem);
 }
 
