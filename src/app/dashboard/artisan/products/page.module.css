@@ -51,14 +51,3 @@
   align-items: center;
   flex-wrap: wrap;
 }
-
-.deleteButton {
-  border: none;
-  background: transparent;
-  color: #b42318;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  padding: 0;
-  font: inherit;
-}

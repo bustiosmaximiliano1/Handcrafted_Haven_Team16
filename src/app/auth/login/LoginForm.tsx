@@ -33,7 +33,7 @@ export default function LoginForm() {
         </p>
       )}
 
-      <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
+      <button type="submit" className={`button button--dark ${styles.submit}`}>
         Sign In
       </button>
     </form>

@@ -34,7 +34,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
           <Link
             href={redirectPath}
-            className={`button button--primary button--subtle-lift ${styles.button}`}
+            className="button button--dark"
           >
             {buttonText}
           </Link>

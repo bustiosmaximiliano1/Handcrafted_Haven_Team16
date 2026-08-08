@@ -119,7 +119,7 @@ export default function RegisterArtisanForm() {
 
       <button
         type="submit"
-        className={`button button--primary button--subtle-lift ${styles.submit}`}
+        className={`button button--dark ${styles.submit}`}
         disabled={Boolean(profileImageUrlError)}
       >
         Create Seller Account

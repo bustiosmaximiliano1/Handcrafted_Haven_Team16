@@ -70,7 +70,7 @@ export default async function CustomerCheckoutPage() {
             </Link>
 
             <form action={checkoutCartAction}>
-              <button type="submit" className={styles.checkoutButton}>
+              <button type="submit" className="button button--dark">
                 Place order
               </button>
             </form>

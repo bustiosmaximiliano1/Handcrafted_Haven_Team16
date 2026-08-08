@@ -49,7 +49,7 @@ export default async function AdminProductsPage() {
               <div className={styles.actions}>
                 <Link href={`/dashboard/admin/products/${product.id}/edit`}>Edit product</Link>
                 <form action={deleteProduct.bind(null, product.id)}>
-                  <button type="submit" className={styles.deleteButton}>
+                  <button type="submit" className="button button--light">
                     Delete product
                   </button>
                 </form>

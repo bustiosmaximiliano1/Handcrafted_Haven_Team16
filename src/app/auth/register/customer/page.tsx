@@ -35,7 +35,7 @@ export default function RegisterCustomerPage() {
               <input type="password" id="password" name="password" required className={styles.input} />
             </div>
 
-            <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
+            <button type="submit" className={`button button--dark ${styles.submit}`}>
               Create Customer Account
             </button>
           </form>

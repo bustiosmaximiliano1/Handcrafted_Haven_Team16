@@ -88,7 +88,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
         {(activeCategoryId || legacyCategoryName || query || minPrice || maxPrice || inStock || sort) && (
           <div className={styles.clearFilterWrap}>
-            <Link href="/products" className={`button button--secondary ${styles.clearFilterButton}`}>
+            <Link href="/products" className={`button button--light ${styles.clearFilterButton}`}>
               Clear filters
             </Link>
           </div>
@@ -143,7 +143,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                       <input type="hidden" name="productId" value={product.id} />
                       <input type="hidden" name="redirectTo" value="/products" />
                       <AddToCartSubmitButton
-                        className="button button--primary button--subtle-lift product-card__actionButton"
+                        className="button button--dark product-card__actionButton"
                         idleText="Add to cart"
                         pendingText="Adding..."
                       />

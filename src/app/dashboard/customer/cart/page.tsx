@@ -57,7 +57,7 @@ export default async function CustomerCartPage() {
 
             <div className={styles.total}>Total: ${total.toFixed(2)}</div>
 
-            <Link href="/dashboard/customer/checkout" className={styles.checkoutButton}>
+            <Link href="/dashboard/customer/checkout" className={`button button--dark ${styles.checkoutButton}`}>
               Proceed to checkout
             </Link>
           </div>

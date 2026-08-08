@@ -15,7 +15,7 @@ export default function ArtisanProfileSuccessPage() {
 
         <Link
           href="/dashboard/artisan/products"
-          className={`${styles.successButton} button button--primary`}
+          className="button button--dark"
         >
           Return to Dashboard
         </Link>

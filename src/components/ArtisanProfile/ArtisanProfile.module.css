@@ -121,26 +121,6 @@
   margin: 0.5rem 0;
 }
 
-.submitBtn {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 1rem;
-  padding: 0.85rem 1.5rem;
-  background: var(--black);
-  color: var(--white);
-  border: none;
-  border-radius: var(--radius);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.submitBtn:hover {
-  background: var(--black);
-}
-
 .productButton {
   width: 100%;
 }

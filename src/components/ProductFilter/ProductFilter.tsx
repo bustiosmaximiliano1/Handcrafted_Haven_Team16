@@ -124,7 +124,7 @@ export default function ProductFilter({
         <button
           type="button"
           onClick={() => updateCategory()}
-          className={`${styles.categoryButton} ${!activeCategoryId ? styles.categoryButtonActive : ""}`}
+          className={`button ${!activeCategoryId ? "button--dark" : "button--light"} ${styles.categoryButton}`}
           aria-pressed={!activeCategoryId}
         >
           All categories
@@ -139,7 +139,7 @@ export default function ProductFilter({
             <button
               type="button"
               onClick={() => updateCategory(category.id)}
-              className={`${styles.categoryButton} ${isActive ? styles.categoryButtonActive : ""}`}
+              className={`button ${isActive ? "button--dark" : "button--light"} ${styles.categoryButton}`}
               aria-pressed={isActive}
             >
               {category.name}
@@ -201,10 +201,10 @@ export default function ProductFilter({
       </label>
 
       <div className={styles.actions}>
-        <button type="submit" className="button button--primary">
+        <button type="submit" className="button button--dark">
           Apply
         </button>
-        <button type="button" className="button button--secondary" onClick={clearAdvancedFilters}>
+        <button type="button" className="button button--light" onClick={clearAdvancedFilters}>
           Reset
         </button>
       </div>
@@ -221,7 +221,7 @@ export default function ProductFilter({
 
       <button
         type="button"
-        className={styles.mobileFloatingButton}
+        className={`${styles.mobileFloatingButton} button button--dark`}
         onClick={() => setIsMobileOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={isMobileOpen}
@@ -244,7 +244,7 @@ export default function ProductFilter({
               <h2 className={styles.mobilePanelTitle}>Choose category</h2>
               <button
                 type="button"
-                className={styles.mobileCloseButton}
+                className={`${styles.mobileCloseButton} button button--light`}
                 onClick={() => setIsMobileOpen(false)}
                 aria-label="Close filters"
               >

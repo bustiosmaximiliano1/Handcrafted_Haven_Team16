@@ -38,7 +38,7 @@ export default function ArtisanCard({ artisan }: ArtisanCardProps) {
 
       <Link
         href={`/artisans/${artisan.id}/profile`}
-        className={`button button--primary ${styles.profileButton}`}
+        className={`button button--dark ${styles.profileButton}`}
       >
         View Profile & Story
       </Link>

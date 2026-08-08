@@ -28,10 +28,10 @@ export default function Hero() {
         </p>
 
         <div className={styles.buttons}>
-          <Link href="/products" className="button button--primary">
+          <Link href="/products" className="button button--dark">
             Shop collection
           </Link>
-          <Link href="/artisans" className="button button--secondary">
+          <Link href="/artisans" className="button button--light">
             Meet artisans
           </Link>
         </div>

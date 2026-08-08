@@ -19,7 +19,7 @@ export default function LogoutPage() {
           </p>
 
           <div className={styles.actions}>
-            <Link href="/auth/login" className="button button--primary button--subtle-lift">
+            <Link href="/auth/login" className="button button--dark">
               Sign in again
             </Link>
             <Link href="/products" className={styles.secondaryLink}>
