@@ -24,7 +24,7 @@
   height: clamp(260px, 32vw, 420px);
   border-radius: 10px;
   overflow: hidden;
-  background: var(--paper-2);
+  background: var(--white);
 }
 
 .imagePlaceholder {
@@ -32,8 +32,8 @@
   height: clamp(260px, 32vw, 420px);
   border: none;
   border-radius: 10px;
-  background: var(--paper-2);
-  color: var(--ink-soft);
+  background: var(--white);
+  color: var(--black);
   display: grid;
   place-items: center;
   text-align: center;
@@ -50,11 +50,11 @@
 .pill {
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 999px;
   padding: 0.3rem 0.7rem;
   font-size: 0.78rem;
-  color: var(--ink-soft);
+  color: var(--black);
   letter-spacing: 0.03em;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .artisanText {
-  color: var(--ink-soft);
+  color: var(--black);
   margin-bottom: 0.8rem;
 }
 
@@ -72,7 +72,7 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--black);
 }
 
 .price {
@@ -82,7 +82,7 @@
 }
 
 .description {
-  color: var(--ink-soft);
+  color: var(--black);
   line-height: 1.75;
   margin-bottom: 1.35rem;
 }
@@ -110,7 +110,7 @@
 .backLink {
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  color: var(--ink-soft);
+  color: var(--black);
 }
 
 .reviewsCard {
@@ -135,7 +135,7 @@
 }
 
 .reviewsSubtitle {
-  color: var(--ink-soft);
+  color: var(--black);
   margin: 0;
 }
 
@@ -147,7 +147,7 @@
 
 .emptyReviews,
 .reviewGate {
-  color: var(--ink-soft);
+  color: var(--black);
   margin: 0;
 }
 
@@ -159,7 +159,7 @@
 
 .reviewItem {
   padding: 1rem;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.5);
 }
@@ -178,7 +178,7 @@
 
 .reviewMeta,
 .reviewDate {
-  color: var(--ink-soft);
+  color: var(--black);
   margin: 0.15rem 0 0;
   font-size: 0.9rem;
 }
@@ -191,11 +191,11 @@
 .reviewBody {
   margin: 0;
   line-height: 1.7;
-  color: var(--ink);
+  color: var(--black);
 }
 
 .reviewFormWrap {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding-top: 1.25rem;
 }
 
@@ -217,18 +217,18 @@
 
 .fieldLabel {
   font-weight: 600;
-  color: var(--ink);
+  color: var(--black);
 }
 
 .input,
 .select,
 .textarea {
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   padding: 0.8rem 0.95rem;
-  background: #fff;
-  color: var(--ink);
+  background: var(--white);
+  color: var(--black);
   font: inherit;
 }
 
@@ -241,7 +241,7 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--black);
 }
 
 @media (max-width: 900px) {

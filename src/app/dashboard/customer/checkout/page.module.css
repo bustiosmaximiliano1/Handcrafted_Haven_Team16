@@ -7,7 +7,7 @@
 }
 
 .subtitle {
-  color: var(--ink-soft);
+  color: var(--black);
   margin-bottom: 1.5rem;
 }
 
@@ -50,13 +50,13 @@
 }
 
 .backLink {
-  color: var(--ink-soft);
+  color: var(--black);
 }
 
 .checkoutButton {
   padding: 0.75rem 1.25rem;
   border-radius: 999px;
-  background: var(--pine);
+  background: var(--black);
   color: white;
   border: none;
   cursor: pointer;

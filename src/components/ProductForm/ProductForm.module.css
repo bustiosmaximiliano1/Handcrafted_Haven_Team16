@@ -1,18 +1,18 @@
 .card {
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .title {
-  color: var(--ink);
+  color: var(--black);
   margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  color: var(--ink-soft);
+  color: var(--black);
   margin-bottom: 2rem;
   font-size: 0.9rem;
 }
@@ -31,7 +31,7 @@
 
 .label {
   font-weight: 600;
-  color: var(--ink);
+  color: var(--black);
   font-size: 0.95rem;
 }
 
@@ -41,9 +41,9 @@
   width: 100%;
   padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid var(--line);
-  background: var(--paper);
-  color: var(--ink);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--white);
+  color: var(--black);
   font-family: var(--font-body);
   font-size: 1rem;
   transition: border-color 0.2s ease;
@@ -53,15 +53,15 @@
 .select:focus,
 .textarea:focus {
   outline: none;
-  border-color: var(--pine);
+  border-color: var(--black);
   box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
 }
 
 .submitBtn {
   margin-top: 1rem;
   padding: 0.85rem 1.5rem;
-  background: var(--pine);
-  color: var(--paper);
+  background: var(--black);
+  color: var(--white);
   border: none;
   border-radius: var(--radius);
   font-weight: 600;
@@ -71,7 +71,7 @@
 }
 
 .submitBtn:hover {
-  background: var(--pine-deep);
+  background: var(--black);
 }
 
 .helperText {

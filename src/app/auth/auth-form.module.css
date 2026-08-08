@@ -32,22 +32,22 @@
 
 .label {
   font-weight: 600;
-  color: var(--ink);
+  color: var(--black);
 }
 
 .input {
   width: 100%;
   padding: 0.8rem 0.9rem;
   border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: var(--paper);
-  color: var(--ink);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--white);
+  color: var(--black);
   font-size: 0.98rem;
 }
 
 .fieldHint {
   margin: 0;
-  color: var(--ink-soft);
+  color: var(--black);
   font-size: 0.88rem;
   line-height: 1.45;
 }
@@ -61,7 +61,7 @@
 
 .listTitle {
   margin: 0.15rem 0 0;
-  color: var(--ink-soft);
+  color: var(--black);
   font-size: 0.86rem;
   font-weight: 600;
 }
@@ -69,7 +69,7 @@
 .inlineList {
   margin: 0.2rem 0 0;
   padding-left: 1rem;
-  color: var(--ink-soft);
+  color: var(--black);
   font-size: 0.84rem;
   line-height: 1.4;
 }
@@ -92,7 +92,7 @@
 .authHelp {
   margin-top: 1.25rem;
   text-align: center;
-  color: var(--ink-soft);
+  color: var(--black);
 }
 
 .authHelp a {
