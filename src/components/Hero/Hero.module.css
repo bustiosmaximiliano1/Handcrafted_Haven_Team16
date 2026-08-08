@@ -18,9 +18,9 @@
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(12, 12, 12, 0.64) 0%,
-    rgba(12, 12, 12, 0.45) 42%,
-    rgba(12, 12, 12, 0.3) 100%
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.62) 42%,
+    rgba(0, 0, 0, 0.46) 100%
   );
 }
 
@@ -32,12 +32,20 @@
   padding-block: clamp(3rem, 8vw, 5.5rem);
 }
 
+.contentPanel {
+  background: rgba(0, 0, 0, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+}
+
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.78rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--white);
   margin-bottom: 1rem;
 }
 
@@ -50,7 +58,7 @@
 
 .sub {
   font-size: clamp(1rem, 1.7vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--white);
   max-width: 34rem;
   margin-bottom: 1.8rem;
 }
