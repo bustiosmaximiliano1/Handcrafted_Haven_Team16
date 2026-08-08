@@ -5,8 +5,8 @@
 }
 
 .card {
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
@@ -16,13 +16,13 @@
 .badge {
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--pine);
+  color: var(--black);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .title {
-  color: var(--pine);
+  color: var(--black);
   font-size: 2.25rem;
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
@@ -37,43 +37,43 @@
   height: 92px;
   border-radius: 999px;
   object-fit: cover;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .avatarFallback {
   width: 92px;
   height: 92px;
   border-radius: 999px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   display: grid;
   place-items: center;
-  color: var(--ink-soft);
-  background: var(--paper-soft);
+  color: var(--black);
+  background: var(--white);
   font-weight: 700;
   font-size: 1.25rem;
 }
 
 .sectionTitle {
-  color: var(--pine);
+  color: var(--black);
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
 .storyHeader {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding-top: 1.25rem;
   margin-top: 1rem;
 }
 
 .label {
   font-weight: 600;
-  color: var(--ink);
+  color: var(--black);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  color: var(--ink-soft);
+  color: var(--black);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -90,8 +90,8 @@
 }
 
 .productCard {
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
@@ -103,13 +103,13 @@
 .categoryTag {
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--pine);
+  color: var(--black);
   text-transform: uppercase;
 }
 
 .productName {
   font-weight: 600;
-  color: var(--ink);
+  color: var(--black);
   font-size: 1.15rem;
   margin: 0.35rem 0;
 }
@@ -117,7 +117,7 @@
 .price {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--black);
   margin: 0.5rem 0;
 }
 
@@ -127,8 +127,8 @@
   text-decoration: none;
   margin-top: 1rem;
   padding: 0.85rem 1.5rem;
-  background: var(--pine);
-  color: var(--paper);
+  background: var(--black);
+  color: var(--white);
   border: none;
   border-radius: var(--radius);
   font-weight: 600;
@@ -138,7 +138,7 @@
 }
 
 .submitBtn:hover {
-  background: var(--pine-deep);
+  background: var(--black);
 }
 
 .productButton {

@@ -26,7 +26,7 @@
 }
 
 .row {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .cell {
@@ -35,14 +35,14 @@
 
 .productLink,
 .editLink {
-  color: var(--ink);
+  color: var(--black);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
 
 .muted {
-  color: var(--ink-soft);
+  color: var(--black);
 }
 
 .actions {

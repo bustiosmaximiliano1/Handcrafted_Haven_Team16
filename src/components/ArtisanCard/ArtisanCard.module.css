@@ -12,7 +12,7 @@
   height: 72px;
   border-radius: 999px;
   margin-bottom: 0.85rem;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .avatar {
@@ -23,8 +23,8 @@
   display: grid;
   place-items: center;
   font-weight: 700;
-  color: var(--ink-soft);
-  background: var(--paper-2);
+  color: var(--black);
+  background: var(--white);
 }
 
 .name {

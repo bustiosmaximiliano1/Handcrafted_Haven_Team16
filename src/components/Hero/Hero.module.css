@@ -27,7 +27,7 @@
 .content {
   position: relative;
   z-index: 2;
-  color: #ffffff;
+  color: var(--white);
   max-width: 46rem;
   padding-block: clamp(3rem, 8vw, 5.5rem);
 }
@@ -45,7 +45,7 @@
   font-size: clamp(2.2rem, 5.4vw, 4.4rem);
   line-height: 0.98;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .sub {
@@ -63,13 +63,13 @@
 
 .buttons :global(.button--secondary) {
   border-color: rgba(255, 255, 255, 0.75);
-  color: #ffffff;
+  color: var(--white);
   background: transparent;
 }
 
 .buttons :global(.button--secondary:hover) {
-  background: #ffffff;
-  color: #111111;
+  background: var(--white);
+  color: var(--black);
 }
 
 @media (max-width: 860px) {
