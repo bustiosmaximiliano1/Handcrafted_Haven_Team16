@@ -19,21 +19,23 @@ export default function Hero() {
       <span className={styles.overlay} aria-hidden="true" />
 
       <div className={`container ${styles.content}`}>
-        <p className={styles.eyebrow}>Handcrafted Haven</p>
-        <h1 id="hero-title" className={styles.title}>
-          Modern craft. Timeless pieces.
-        </h1>
-        <p className={styles.sub}>
-          Discover curated handmade work from independent artisans.
-        </p>
+        <div className={styles.contentPanel}>
+          <p className={styles.eyebrow}>Handcrafted Haven</p>
+          <h1 id="hero-title" className={styles.title}>
+            Modern craft. Timeless pieces.
+          </h1>
+          <p className={styles.sub}>
+            Discover curated handmade work from independent artisans.
+          </p>
 
-        <div className={styles.buttons}>
-          <Link href="/products" className="button button--dark">
-            Shop collection
-          </Link>
-          <Link href="/artisans" className="button button--light">
-            Meet artisans
-          </Link>
+          <div className={styles.buttons}>
+            <Link href="/products" className="button button--light">
+              Shop collection
+            </Link>
+            <Link href="/artisans" className="button button--light">
+              Meet artisans
+            </Link>
+          </div>
         </div>
       </div>
     </section>
