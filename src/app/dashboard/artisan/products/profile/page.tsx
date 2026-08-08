@@ -77,7 +77,7 @@ export default async function ArtisanProfileEditPage() {
               />
             </div>
 
-            <button type="submit" className={`button button--primary button--subtle-lift ${styles.submit}`}>
+            <button type="submit" className={`button button--dark ${styles.submit}`}>
               Save Changes
             </button>
           </form>

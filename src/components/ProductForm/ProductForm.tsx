@@ -204,7 +204,7 @@ export default function ProductForm({
 
         <button
           type="submit"
-          className={`${styles.submitBtn} button button--primary`}
+          className={`${styles.submitBtn} button button--dark`}
           disabled={Boolean(imageUrlError)}
         >
           {buttonText}

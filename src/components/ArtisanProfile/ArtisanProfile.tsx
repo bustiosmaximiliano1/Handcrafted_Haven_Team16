@@ -78,7 +78,7 @@ export default function ArtisanProfile({ artisan }: ArtisanProfileProps) {
                   </p>
                 </div>
 
-                <Link href={`/products/${product.id}`} className={`button button--primary ${styles.productButton}`}>
+                <Link href={`/products/${product.id}`} className={`button button--dark ${styles.productButton}`}>
                   View Product
                 </Link>
               </div>

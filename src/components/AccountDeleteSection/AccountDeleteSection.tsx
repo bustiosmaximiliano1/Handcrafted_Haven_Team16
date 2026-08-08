@@ -19,7 +19,7 @@ export default function AccountDeleteSection() {
 
       <button
         type="button"
-        className={`button button--secondary ${styles.trigger}`}
+        className={`button button--light ${styles.trigger}`}
         onClick={() => dialogRef.current?.showModal()}
       >
         Delete account
@@ -51,7 +51,7 @@ export default function AccountDeleteSection() {
             <div className={styles.actions}>
               <button
                 type="button"
-                className={styles.cancel}
+                className={`button button--light ${styles.cancel}`}
                 onClick={() => dialogRef.current?.close()}
                 disabled={isPending}
               >

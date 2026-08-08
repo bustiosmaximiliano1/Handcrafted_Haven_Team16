@@ -121,7 +121,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   <input type="hidden" name="productId" value={product.id} />
                   <input type="hidden" name="redirectTo" value={`/products/${product.id}`} />
                   <AddToCartSubmitButton
-                    className="button button--primary button--subtle-lift"
+                    className="button button--dark"
                     idleText="Add to cart"
                     pendingText="Adding..."
                   />
@@ -218,7 +218,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                     />
                   </label>
 
-                  <button type="submit" className="button button--primary button--subtle-lift">
+                  <button type="submit" className="button button--dark">
                     Submit review
                   </button>
                 </form>

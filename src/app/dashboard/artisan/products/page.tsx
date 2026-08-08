@@ -37,7 +37,7 @@ export default async function ArtisanProductsPage() {
           <h1 className={`page-title ${styles.title}`}>My Products</h1>
           <Link
             href="/dashboard/artisan/products/new"
-            className="button button--primary"
+            className="button button--dark"
           >
             + Add New Product
           </Link>
@@ -74,7 +74,7 @@ export default async function ArtisanProductsPage() {
                           Edit
                         </Link>
                         <form action={deleteOwnProduct.bind(null, product.id)}>
-                          <button type="submit" className={styles.deleteButton}>
+                          <button type="submit" className="button button--light">
                             Delete
                           </button>
                         </form>

@@ -73,21 +73,6 @@ button:focus-visible {
   border-radius: 4px;
 }
 
-/* I added this skip link so keyboard users can jump directly to main content. */
-.skip-link {
-  position: absolute;
-  left: -999px;
-  top: 0;
-  background: var(--black);
-  color: var(--white);
-  padding: 0.75rem 1.25rem;
-  z-index: 1000;
-  border-radius: 0 0 var(--radius) 0;
-}
-.skip-link:focus {
-  left: 0;
-}
-
 /* I respect reduced-motion preferences by disabling animations and transitions here. */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -117,50 +102,44 @@ button:focus-visible {
   color: var(--black);
 }
 
+/* ==========================================
+  Buttons
+  ========================================== */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.85rem 1.6rem;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 999px;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.18s ease;
 }
 
-.button--primary {
-  background: var(--black);
-  color: var(--white);
-}
-
-.button--primary:hover {
-  background: var(--black);
-}
-
-.button--secondary {
-  border: 1.5px solid var(--black);
+/* Variant 1: White background / Black text -> Pure inversion to Black/White on hover */
+.button--light {
+  background-color: var(--white);
   color: var(--black);
-  background: var(--white);
+  border: 2px solid var(--black);
 }
 
-.button--secondary:hover {
-  background: var(--black);
+.button--light:hover {
+  background-color: var(--black);
   color: var(--white);
 }
 
-.button--subtle-lift {
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+/* Variant 2: Black background / White text -> Pure inversion to White/Black on hover */
+.button--dark {
+  background-color: var(--black);
+  color: var(--white);
 }
 
-.button--subtle-lift:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px -12px rgba(0, 0, 0, 0.5);
-}
-
-.button--subtle-lift:active {
-  transform: translateY(0);
+.button--dark:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border: 2px solid var(--black);
 }
 
 /* I added these catalog card helpers to keep product cards consistent across pages. */
