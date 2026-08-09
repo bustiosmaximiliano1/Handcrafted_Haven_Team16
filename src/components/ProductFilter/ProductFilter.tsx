@@ -30,7 +30,8 @@ export default function ProductFilter({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+ const [isMobileOpen, setIsMobileOpen] = useState(false);
+const [validationError, setValidationError] = useState("");
 
   const activeCategoryName = useMemo(() => {
     const selected = categories.find((category) => category.id === activeCategoryId);
@@ -73,6 +74,23 @@ export default function ProductFilter({
     const formData = new FormData(event.currentTarget);
     const nextMinPrice = String(formData.get("minPrice") ?? "").trim();
     const nextMaxPrice = String(formData.get("maxPrice") ?? "").trim();
+
+    // Clear any previous validation message
+setValidationError("");
+
+// Validate the price range
+if (nextMinPrice && nextMaxPrice) {
+  const min = Number(nextMinPrice);
+  const max = Number(nextMaxPrice);
+
+  if (min > max) {
+    setValidationError(
+      "Minimum price cannot be greater than maximum price."
+    );
+    return;
+  }
+}
+
     const nextSort = String(formData.get("sort") ?? "newest").trim();
     const nextInStockOnly = formData.get("inStock") === "1";
     const params = new URLSearchParams(searchParams.toString());
@@ -199,6 +217,17 @@ export default function ProductFilter({
           <option value="name_asc">Name: A to Z</option>
         </select>
       </label>
+
+
+{validationError && (
+  <p
+    className={styles.validationError}
+    role="alert"
+    aria-live="polite"
+  >
+    {validationError}
+  </p>
+)}
 
       <div className={styles.actions}>
         <button type="submit" className="button button--dark">

@@ -159,3 +159,10 @@
     box-shadow: 0 16px 30px -20px rgba(17, 17, 17, 0.7);
   }
 }
+
+.validationError {
+  color: #c62828;
+  font-size: 0.9rem;
+  margin: 0.75rem 0;
+  font-weight: 600;
+}
